@@ -8,6 +8,9 @@ inputs:
   password:
     description: "password or token for login ghcr.io"
     required: true
+  registry:
+    description: "login website which is file need to be uploaded into"
+    required: true
 
 runs:
   using: "composite"
@@ -15,7 +18,7 @@ runs:
     - name: Login
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io/wikifactory/frontend
+        registry: ${{ inputs.registry }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
     - name: Set up QEMU
