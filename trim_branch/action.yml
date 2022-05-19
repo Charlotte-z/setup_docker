@@ -16,4 +16,5 @@ runs:
   using: "composite"
   steps:
     - name: trim branch
+      shell: bash
       run: echo "TRIM_BRANCH=$(echo ${{ github.ref_name }} | sed -r 's,/,-,g' | tr A-Z a-z)" >> $GITHUB_ENV
