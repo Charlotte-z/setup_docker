@@ -3,13 +3,13 @@ description: 'reuse the same steps for docker'
 
 inputs:
   username:
-    description: "username for login ghcr.io"
+    description: "username for login"
     required: true
   password:
-    description: "password or token for login ghcr.io"
+    description: "password or token for login"
     required: true
   registry:
-    description: "login website which is file need to be uploaded into"
+    description: "login ghcr.io or docker hub or the other else"
     required: true
 
 runs:
