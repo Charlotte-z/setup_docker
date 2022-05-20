@@ -1,0 +1,13 @@
+name: Reusable workflow example
+
+on: push
+
+jobs:
+  example_job:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'step1'
+        run: echo 'awddwa'
+      - name: 'step2'
+        uses: ./.github/workflows/run2.yml
