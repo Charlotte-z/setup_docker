@@ -9,8 +9,9 @@ inputs:
     description: "password or token for login"
     required: true
   registry:
-    description: "login ghcr.io or docker hub or the other else"
+    description: "login"
     required: true
+
 
 runs:
   using: "composite"
@@ -21,6 +22,7 @@ runs:
         registry: ${{ inputs.registry }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
+        logout: false
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     - name: Set up Docker Buildx
