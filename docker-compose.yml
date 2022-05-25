@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx:1.21.6-alpine
     ports:
-      - "8080:80"
+      - "8089:80"
 
 networks:
   wikifactory-development:
