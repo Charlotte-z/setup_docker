@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: add host
+        run: echo "127.0.0.1 localweb" | sudo tee -a /etc/hosts
       - name: Build the stack
         run: |
           docker-compose up -d
