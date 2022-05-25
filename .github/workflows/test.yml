@@ -1,0 +1,22 @@
+name: run-integration
+
+on: push
+# on:
+#   workflow_call:
+#     inputs:
+#       username:
+#         required: true
+#         type: string
+#       registry:
+#         required: true
+#         type: string
+
+jobs:
+  build:
+    name: run docker compose
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build the stack
+        run: |
+          docker-compose up -d
+          curl localhost:8080

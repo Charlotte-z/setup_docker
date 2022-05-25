@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+
+  redis:
+    image: nginx:1.21.6-alpine
+    ports:
+      - 127.0.0.1:8080:6379
+
+networks:
+  wikifactory-development:
+    driver: bridge
