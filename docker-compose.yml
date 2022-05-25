@@ -8,4 +8,4 @@ services:
 
 networks:
   wikifactory-development:
-    driver: bridge
+    driver: host

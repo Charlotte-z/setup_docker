@@ -21,5 +21,6 @@ jobs:
       - name: Build the stack
         run: |
           docker-compose up -d
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+          curl localhost:8080
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
