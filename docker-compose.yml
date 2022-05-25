@@ -6,7 +6,7 @@ services:
     networks:
       - wikifactory-development
     ports:
-      - "8089:80"
+      - 8089:80
 
 networks:
   wikifactory-development:
