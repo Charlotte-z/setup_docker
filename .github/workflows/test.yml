@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build the stack
         run: |
-          netstat -ntlp
+          docker-compose up -d
+          curl http://localhost:8089
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
