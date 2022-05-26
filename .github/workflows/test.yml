@@ -24,5 +24,7 @@ jobs:
         run: |
           docker-compose up -d
           curl http://localweb:8089
+      - name:
+        run: echo 'code pass'
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
