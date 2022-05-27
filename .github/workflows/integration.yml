@@ -3,9 +3,10 @@ name: run-integration
 on:
   workflow_call:
     inputs:
-      image:
-        required: true
+      A:
+        required: false
         type: string
+        default: master
 
 jobs:
   build:
@@ -17,5 +18,5 @@ jobs:
       - name: test
         run: |
           touch .env
-          echo ${{ inputs.image }}=12.6 >> .env
+          echo A=${{ inputs.A }} >> .env
           docker-compose up -d
