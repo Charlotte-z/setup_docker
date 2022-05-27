@@ -16,5 +16,5 @@ jobs:
     needs: build
     uses: ./.github/workflows/integration.yml
     with:
-      A: ${{ needs.build.test }}
+      A: ${{ needs.build.outputs.test }}
     secrets: inherit
