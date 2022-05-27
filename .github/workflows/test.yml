@@ -14,5 +14,5 @@ jobs:
     needs: build
     uses: ./.github/workflows/integration.yml
     with:
-      image: NGINX
+      image: VS
     secrets: inherit
