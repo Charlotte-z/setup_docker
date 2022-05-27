@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+
+  nginx:
+    image: nginx:${VS-1.21.6}
+    networks:
+      - wikifactory-development
+    ports:
+      - "8089:80"
+
+networks:
+  wikifactory-development:
+    driver: bridge

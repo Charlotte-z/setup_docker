@@ -1,0 +1,21 @@
+name: run-integration
+
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: run docker compose
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: test
+        run: |
+          touch .env
+          echo ${{ inputs.image }}=12.6 >> .env
+          docker-compose up -d

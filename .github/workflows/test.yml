@@ -1,0 +1,18 @@
+name: build-backend-go
+
+on: push
+
+jobs:
+  build:
+    name: build backend go image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        run: echo 'awddwa'
+
+  integration:
+    needs: build
+    uses: ./.github/workflows/integration.yml
+    with:
+      image: NGINX
+    secrets: inherit
