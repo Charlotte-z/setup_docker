@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        run: echo 'awddwa'
+        run: echo "TRIM_BRANCH=$(echo ${{ github.ref_name }} | sed -r 's,/,-,g' | tr A-Z a-z)" >> $GITHUB_ENV
 
   integration:
     needs: build
     uses: ./.github/workflows/integration.yml
+    with:
+      A: ${{ env.TRIM_BRANCH }}
     secrets: inherit
