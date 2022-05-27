@@ -9,10 +9,12 @@ jobs:
     steps:
       - name: Checkout code
         run: echo "TRIM_BRANCH=$(echo ${{ github.ref_name }} | sed -r 's,/,-,g' | tr A-Z a-z)" >> $GITHUB_ENV
+    outputs:
+      test: ${{ env.TRIM_BRANCH }}
 
   integration:
     needs: build
     uses: ./.github/workflows/integration.yml
     with:
-      A: ${{ env.TRIM_BRANCH }}
+      A: ${{ build.test }}
     secrets: inherit
