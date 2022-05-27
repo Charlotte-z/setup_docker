@@ -13,6 +13,4 @@ jobs:
   integration:
     needs: build
     uses: ./.github/workflows/integration.yml
-    with:
-      A: 12
     secrets: inherit
