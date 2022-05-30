@@ -1,0 +1,10 @@
+name: a
+
+on: push
+
+jobs:
+  build:
+    name: build backend go image
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'a running'

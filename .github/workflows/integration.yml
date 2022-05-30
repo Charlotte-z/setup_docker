@@ -1,22 +1,14 @@
 name: run-integration
 
 on:
-  workflow_call:
-    inputs:
-      A:
-        required: false
-        type: string
-        default: master
+  workflow_run:
+    workflows: [a, b]
+    types:
+      - completed
 
 jobs:
   build:
     name: run docker compose
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: test
-        run: |
-          touch .env
-          echo A=${{ inputs.A }} >> .env
-          docker-compose up -d
+      - run: echo "integration"
