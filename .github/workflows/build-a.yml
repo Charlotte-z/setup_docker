@@ -1,15 +1,11 @@
 name: a
 
-on:
-  pull_request:
-    types: [opened, ready_for_review]
-    paths:
-      - 'a/**.js'
+on: workflow_call
 
 jobs:
   build:
     name: build a test
-    if: ${{ github.event == 'workflow_call' }}
+    if: ${{ github. }}
     runs-on: ubuntu-latest
     steps:
       - run: echo 'a is running'
