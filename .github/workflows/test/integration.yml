@@ -3,8 +3,8 @@ name: run-integration
 on: workflow_call
 
 jobs:
-  build:
-    needs: [build/a, build/b]
+  # build:
+  #   needs: [a, build/b]
 
   integration:
     name: run integration
