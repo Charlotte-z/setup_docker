@@ -20,7 +20,7 @@ jobs:
     needs: is_files_changed
     # if: needs.is_files_changed.outputs.files_changed == 'true'
     steps:
-      - run: ${{ toJSON(needs.is_files_changed) }}
+      - run: ${{ toJSON(needs.is_files_changed.changes) }}
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
