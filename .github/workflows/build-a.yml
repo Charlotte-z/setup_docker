@@ -1,6 +1,11 @@
 name: a
 
-on: workflow_call
+on: 
+  workflow_call:
+  pull_request:
+    types: [opened, ready_for_review]
+    paths:
+      - 'ingress/Dockerfile'
 
 jobs:
   build:
