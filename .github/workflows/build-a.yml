@@ -1,8 +1,8 @@
 name: a
 
 on:
-  # push:
-  #   - paths: 'a/*'
+  push:
+    - paths: 'a/*'
   workflow_call
 
 jobs:

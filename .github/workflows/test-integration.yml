@@ -11,6 +11,7 @@ jobs:
     uses: ./.github/workflows/build-b.yml
 
   integration:
+    needs: [build-b]
     name: run integration
     runs-on: ubuntu-latest
     steps:
