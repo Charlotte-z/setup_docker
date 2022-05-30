@@ -8,3 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'a running'
+      - name: Sleep for 10s
+        uses: juliangruber/sleep-action@v1
+        with:
+          time: 10s
