@@ -4,11 +4,11 @@ on: push
 
 jobs:
   build-a:
-    uses: ./github/workflows/build-a.yml
+    uses: ./.github/workflows/build-a.yml
 
   build-b:
     needs: [build-a]
-    uses: ./github/workflows/build-b.yml
+    uses: ./.github/workflows/build-b.yml
 
   integration:
     name: run integration
