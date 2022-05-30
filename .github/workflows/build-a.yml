@@ -3,11 +3,8 @@ name: a
 on: workflow_call
 
 jobs:
-  build:
-    name: build a
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+  is_file_changed:
+     - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
         id: changes
         with:
@@ -15,9 +12,12 @@ jobs:
             src:
               - 'a/**'
 
-        # run only if some file in 'src' folder was changed
-      - if: steps.changes.outputs.src == 'true'
-        run: echo 'skiped'
+  build:
+    needs: is_file_changed
+    name: build a
+    runs-on: ubuntu-latest
+    if: needs.check.outputs.src == 'true'
+    steps:
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
