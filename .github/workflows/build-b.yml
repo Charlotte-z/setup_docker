@@ -3,9 +3,23 @@ name: b
 on: workflow_call
 
 jobs:
+  is_files_changed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            workflows:
+              - 'a/**'
+    outputs:
+      output1: ${{ steps.filter.outputs.workflows }}
+
   build:
     name: build b
     runs-on: ubuntu-latest
+    if: needs.is_files_changed.outputs.output1 == 'true'
     steps:
       - run: echo 'b is running'
       - name: Sleep for 10s
