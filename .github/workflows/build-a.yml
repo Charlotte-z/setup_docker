@@ -1,12 +1,9 @@
 name: a
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
+  push:
+    paths:
+      - 'a/**.js'
   workflow_call:
 
 jobs:
