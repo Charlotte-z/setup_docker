@@ -4,6 +4,7 @@ on: workflow_call
 
 jobs:
   is_file_changed:
+  runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
