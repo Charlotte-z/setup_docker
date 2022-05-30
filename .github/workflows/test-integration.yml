@@ -22,6 +22,8 @@ jobs:
     uses: ./.github/workflows/build-a.yml
 
   build-b:
+    needs: is_files_changed
+    if: needs.is_files_changed.output.b == 'true'
     uses: ./.github/workflows/build-b.yml
 
   integration:
