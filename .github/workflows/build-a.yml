@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: build a
+    name: build a test
     runs-on: ubuntu-latest
     steps:
       - run: echo 'a is running'
