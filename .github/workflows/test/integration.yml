@@ -4,7 +4,7 @@ on: workflow_call
 
 jobs:
   build:
-    needs: [a, b]
+    needs: [build/a, build/b]
 
   integration:
     name: run integration
