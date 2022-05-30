@@ -7,17 +7,17 @@ jobs:
     name: build a
     runs-on: ubuntu-latest
     steps:
-      - name: Verify Changed files
-        uses: tj-actions/verify-changed-files@v9.1
-        id: verify-changed-files
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: changes
         with:
-          files: |
-             *.js
+          filters: |
+            src:
+              - 'a/**'
 
-      - name: Run step only when files change.
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
-        run: |
-          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+        # run only if some file in 'src' folder was changed
+      - if: steps.changes.outputs.src == 'true'
+        run: echo 'skiped'
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
