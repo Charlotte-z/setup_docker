@@ -7,16 +7,14 @@ jobs:
     name: build a
     runs-on: ubuntu-latest
     steps:
-      - name: Verify Changed files
+      - name: Verify Dockerfile changed
         uses: tj-actions/verify-changed-files@v9.1
-        id: verify-changed-files
+        id: changed_files
         with:
           files: |
-            a/*.js
-      - name: Run step only when files change.
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
-        run: |
-          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+             a/**.js
+      - if: steps.changed_files.outputs.files_changed == 'true'
+        run: echo 'skiped'
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
