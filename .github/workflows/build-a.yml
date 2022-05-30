@@ -3,7 +3,7 @@ name: a
 on:
   workflow_call:
   push:
-    - paths: 'a/*'
+    - paths: 'a/**'
 
 jobs:
   build:
