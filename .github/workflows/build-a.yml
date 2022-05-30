@@ -8,7 +8,7 @@ jobs:
     if: ${{ github. }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'a is running'
+      - run: echo '${{ toJSON(github) }}'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
         with:

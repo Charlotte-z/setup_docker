@@ -3,17 +3,15 @@ name: run-integration
 on: push
 
 jobs:
-  # build-a:
-  #   uses: ./.github/workflows/build-a.yml
-  #   if: github.event == 'pull_request' && github.event
+  build-a:
+    uses: ./.github/workflows/build-a.yml
 
-  # build-b:
-  #   uses: ./.github/workflows/build-b.yml
+  build-b:
+    uses: ./.github/workflows/build-b.yml
 
   integration:
-    # needs: [build-b, build-a]
+    needs: [build-b, build-a]
     name: run integration
     runs-on: ubuntu-latest
     steps:
-      # - run: echo "run after a, b, and integration"
-      - run: echo '${{ toJSON(github) }}'
+      - run: echo "run after a, b, and integration"
