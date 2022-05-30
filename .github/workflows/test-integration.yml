@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # - run: echo "run after a, b, and integration"
-      - run: echo ${{ toJSON(github) }}
+      - run: echo '${{ toJSON(github) }}'
