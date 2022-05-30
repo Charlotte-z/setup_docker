@@ -1,15 +1,10 @@
 name: a
 
 on:
-  workflow_call:
-    inputs:
-      name:
-        required: true
-        type: string
-        default: 'wad'
   push:
     paths:
       - '**.js'
+  workflow_call:
 
 jobs:
   build:
