@@ -4,7 +4,7 @@ on:
   workflow_call:
   push:
     paths:
-      - 'ac/**.js'  # trigger on docker file changed
+      - '**.js'
 
 jobs:
   build:
