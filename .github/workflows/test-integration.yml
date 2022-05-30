@@ -7,8 +7,8 @@ jobs:
   #   uses: ./.github/workflows/build-a.yml
   #   if: github.event == 'pull_request' && github.event
 
-  build-b:
-    uses: ./.github/workflows/build-b.yml
+  # build-b:
+  #   uses: ./.github/workflows/build-b.yml
 
   integration:
     # needs: [build-b, build-a]
@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # - run: echo "run after a, b, and integration"
-      - run: echo ${{ JSON.stringify(github.event) }}
+      - run: echo ${{ toJSON(github) }}
