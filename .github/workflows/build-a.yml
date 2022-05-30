@@ -4,7 +4,8 @@ on: workflow_call
 
 jobs:
   is_file_changed:
-     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
         id: changes
         with:
