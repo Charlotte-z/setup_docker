@@ -1,15 +1,14 @@
 name: a
 
-on:
-  push:
-    paths:
-      - '**.js'
-  workflow_call:
+on: workflow_call:
 
 jobs:
   build:
     name: build a
     runs-on: ubuntu-latest
+    only:
+      changes:
+        - "a/**.js"
     steps:
       - run: echo 'a is running'
       - name: Sleep for 10s
