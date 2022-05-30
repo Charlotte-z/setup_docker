@@ -1,11 +1,13 @@
 name: a
 
-on: 
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
   workflow_call:
-  pull_request:
-    types: [opened, ready_for_review]
-    paths:
-      - 'ingress/Dockerfile'
 
 jobs:
   build:
