@@ -4,14 +4,13 @@ on: push
 
 jobs:
   build-a:
-    uses:
-      ./.github/workflows/build-a.yml
-      dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          src:
-            - 'a/**'
+  - uses: ./.github/workflows/build-a.yml
+  - uses: dorny/paths-filter@v2
+    id: changes
+    with:
+      filters: |
+        src:
+          - 'src/**'
 
   build-b:
     uses: ./.github/workflows/build-b.yml
