@@ -7,7 +7,7 @@ jobs:
     name: build b
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ JSON(github) }}'
+      - run: echo '${{ toJSON(github) }}'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
         with:
