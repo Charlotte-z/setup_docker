@@ -12,7 +12,7 @@ jobs:
         id: changed_files
         with:
           files: |
-             a/**
+             a/**.js
       - if: steps.changed_files.outputs.files_changed == 'true'
         run: echo 'skiped'
       - run: echo 'a is running'
