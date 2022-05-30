@@ -1,10 +1,6 @@
 name: run-integration
 
-on:
-  workflow_run:
-    workflows: [a, b]
-    types:
-      - completed
+on: push
 
 jobs:
   build:

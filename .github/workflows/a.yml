@@ -1,6 +1,9 @@
 name: a
 
-on: push
+on:
+  workflow_call
+  push:
+    - paths: 'a/*'
 
 jobs:
   build:
