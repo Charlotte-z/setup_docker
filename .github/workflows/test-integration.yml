@@ -3,8 +3,12 @@ name: run-integration
 on: push
 
 jobs:
-  build:
-    needs: [build-a, build-b]
+  build-a:
+    uses: ./github/workflows/build-a.yml
+
+  build-b:
+    needs: [build-a]
+    uses: ./github/workflows/build-b.yml
 
   integration:
     name: run integration
