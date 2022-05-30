@@ -2,6 +2,9 @@ name: a
 
 on:
   workflow_call:
+    inputs:
+      name:
+        required: false
   push:
     paths:
       - '**.js'
