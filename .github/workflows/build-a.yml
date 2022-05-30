@@ -12,7 +12,7 @@ jobs:
         with:
           filters: |
             a:
-              - 'a/**'
+              - 'a/**.js'
 
   build:
     name: build a
