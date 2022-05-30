@@ -8,13 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
-        id: verify-changed-files
+        id: filter
         with:
           filters: |
-            a:
-              - 'a/**.js'
+            workflows:
+              - 'a/**'
     outputs:
-      file_changed: ${{ steps.verify-changed-files.outputs.files_changed == 'true' }}
+      output1: ${{ steps.filter.outputs.workflows }}
 
   build:
     name: build a
@@ -22,7 +22,7 @@ jobs:
     needs: is_files_changed
     # if: needs.is_files_changed.outputs.file_changed == 'true'
     steps:
-      - run: ${{ toJSON(needs.is_files_changed.outputs.file_changed) }}
+      - run: ${{ toJSON(needs.is_files_changed.outputs.output1) }}
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
