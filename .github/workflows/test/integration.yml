@@ -1,0 +1,13 @@
+name: run-integration
+
+on: workflow_call
+
+jobs:
+  build:
+    needs: [a, b]
+
+  integration:
+    name: run integration
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "run after a, b, and integration"

@@ -1,16 +1,16 @@
 name: a
 
-on: push
-  # workflow_call
-  # push:
-  #   - paths: 'a/*'
+on:
+  workflow_call
+  push:
+    - paths: 'a/*'
 
 jobs:
   build:
-    name: build backend go image
+    name: build a
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'a running'
+      - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
         with:

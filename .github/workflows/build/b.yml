@@ -4,10 +4,10 @@ on: push
 
 jobs:
   build:
-    name: build backend go image
+    name: build b
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'b running'
+      - run: echo 'b is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
         with:
