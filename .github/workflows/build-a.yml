@@ -3,22 +3,9 @@ name: a
 on: workflow_call
 
 jobs:
-  is_file_changed:
-  runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            src:
-              - 'a/**'
-
   build:
-    needs: is_file_changed
     name: build a
     runs-on: ubuntu-latest
-    if: needs.check.changes.outputs.src == 'true'
     steps:
       - run: echo 'a is running'
       - name: Sleep for 10s
