@@ -3,7 +3,8 @@ name: a
 on:
   workflow_call:
   push:
-    - paths: 'a/**'
+    paths:
+      - 'a/**'  # trigger on docker file changed
 
 jobs:
   build:
