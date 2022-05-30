@@ -1,6 +1,6 @@
 name: b
 
-on: workflow_call
+on: push
 
 jobs:
   build:
