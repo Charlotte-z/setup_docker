@@ -7,11 +7,10 @@ jobs:
     uses: ./.github/workflows/build-a.yml
 
   build-b:
-    needs: [build-a]
     uses: ./.github/workflows/build-b.yml
 
   integration:
-    needs: [build-b]
+    needs: [build-b, build-a]
     name: run integration
     runs-on: ubuntu-latest
     steps:
