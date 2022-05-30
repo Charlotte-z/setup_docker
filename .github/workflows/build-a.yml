@@ -20,8 +20,9 @@ jobs:
     name: build a
     runs-on: ubuntu-latest
     needs: is_files_changed
-    if: ${{ needs.is_files_changed.outputs.file_changed == 'true' }}
+    # if: needs.is_files_changed.outputs.file_changed == 'true'
     steps:
+      - run: ${{ toJSON(needs.is_files_changed.outputs.file_changed) }}
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
