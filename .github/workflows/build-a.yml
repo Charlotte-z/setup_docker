@@ -14,6 +14,7 @@ jobs:
           files: |
              a/**
       - if: steps.changed_files.outputs.files_changed == 'true'
+        run: echo 'skiped'
       - run: echo 'a is running'
       - name: Sleep for 10s
         uses: juliangruber/sleep-action@v1
