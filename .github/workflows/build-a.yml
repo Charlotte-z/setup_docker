@@ -17,7 +17,7 @@ jobs:
     needs: is_file_changed
     name: build a
     runs-on: ubuntu-latest
-    if: needs.check.outputs.src == 'true'
+    if: needs.check.changes.outputs.src == 'true'
     steps:
       - run: echo 'a is running'
       - name: Sleep for 10s
