@@ -4,4 +4,4 @@ on: push
 
 jobs:
   development:
-    uses: ./test/integration.yml
+    uses:  ./.github/workflows/integration.yml
