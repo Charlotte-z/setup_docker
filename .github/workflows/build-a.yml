@@ -4,7 +4,9 @@ on:
   workflow_call:
     inputs:
       name:
-        required: false
+        required: true
+        type: string
+        default: 'wad'
   push:
     paths:
       - '**.js'
