@@ -10,4 +10,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: homework
-      - run: cat test.txt
+      - run: |
+          test=$(grep -e "flask_image=" test.txt | sed "s/flask_image=//g")
+          echo '$test'
