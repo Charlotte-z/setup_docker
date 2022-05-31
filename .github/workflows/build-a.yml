@@ -1,4 +1,4 @@
-name: a
+name: test a
 
 on: workflow_call
 
@@ -7,14 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: dorny/paths-filter@v2
+      - run: |
+          echo 'test: ${{ github.sha }}'
+      - run: echo '${{ toJSON(github.event) }}'
+      - run: |
+          echo 'flask_image=test1' > test.txt
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: homework
+          path: test.txt
+      - uses: tj-actions/changed-files@v22
         id: filter
         with:
-          filters: |
-            workflows:
-              - 'a/**'
+          files: |
+              a/**
     outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
+      output1: ${{ steps.filter.outputs.any_changed }}
 
   build:
     name: build a
@@ -22,6 +31,13 @@ jobs:
     needs: is_files_changed
     if: needs.is_files_changed.outputs.output1 == 'true'
     steps:
+      - run: |
+          echo 'flask_image=test2' > test.txt
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: homework
+          path: test.txt
       - run: ${{ toJSON(needs.is_files_changed.outputs.output1) }}
       - run: echo 'a is running'
       - name: Sleep for 10s
