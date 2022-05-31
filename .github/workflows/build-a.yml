@@ -23,6 +23,13 @@ jobs:
     needs: is_files_changed
     if: needs.is_files_changed.outputs.output1 == 'true'
     steps:
+      - run: |
+          expr 3 + 7 > ~/test.txt
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: homework
+          path: ~/test.txt
       - run: ${{ toJSON(needs.is_files_changed.outputs.output1) }}
       - run: echo 'a is running'
       - name: Sleep for 10s

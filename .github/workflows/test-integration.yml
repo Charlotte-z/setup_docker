@@ -7,4 +7,7 @@ jobs:
     name: integration
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'integration'
+      - uses: actions/download-artifact@v3
+        with:
+          name: homework
+      - run: cat ~/test.txt
