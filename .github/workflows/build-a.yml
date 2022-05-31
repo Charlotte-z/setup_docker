@@ -4,17 +4,21 @@ on: workflow_call
 
 jobs:
   is_files_changed:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            workflows:
-              - 'a/**'
-    outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
+    uses: Charlotte-z/workflows/path_filters@main
+      with:
+        filters: |
+          'a/**'
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - uses: actions/checkout@v2
+    #   - uses: dorny/paths-filter@v2
+    #     id: filter
+    #     with:
+    #       filters: |
+    #         workflows:
+    #           - 'a/**'
+    # outputs:
+    #   output1: ${{ steps.filter.outputs.workflows }}
 
   build:
     name: build a
