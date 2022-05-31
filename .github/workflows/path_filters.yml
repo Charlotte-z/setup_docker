@@ -1,12 +1,12 @@
 name: "output is file changed"
 description: 'simplify file change action'
 
-on: workflow_call:
-
-inputs:
-  filters:
-    description: 'Path to the configuration file or YAML string with filters definition'
-    required: true
+on:
+  workflow_call:
+    inputs:
+      filters:
+        description: 'Path to the configuration file or YAML string with filters definition'
+        required: true
 
 
 jobs:
