@@ -19,7 +19,7 @@ jobs:
         id: filter
         with:
           files: |
-              a/**
+              a/** 
     outputs:
       output1: ${{ steps.filter.outputs.any_changed }}
 
