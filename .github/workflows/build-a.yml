@@ -5,9 +5,9 @@ on: workflow_call
 jobs:
   is_files_changed:
     uses: Charlotte-z/workflows/path_filters@main
-      with:
-        filters: |
-          'a/**'
+    with:
+      filters: |
+        'a/**'
     # runs-on: ubuntu-latest
     # steps:
     #   - uses: actions/checkout@v2
