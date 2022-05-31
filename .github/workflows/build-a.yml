@@ -8,11 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: echo '${{ toJSON(github.event) }}'
-      - uses: dorny/paths-filter@v2
+      - uses: tj-actions/changed-files@v22
         id: filter
         with:
-          filters: |
-            workflows:
+          files: |
               - 'a/**'
     outputs:
       output1: ${{ steps.filter.outputs.workflows }}
