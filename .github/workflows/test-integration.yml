@@ -1,18 +1,10 @@
-name: run-integration
+name: test a
 
-on: push
+on: workflow_call
 
 jobs:
-
-  build-a:
-    uses: ./.github/workflows/build-a.yml
-
-  build-b:
-    uses: ./.github/workflows/build-b.yml
-
-  integration:
-    needs: [build-b, build-a]
-    name: run integration
+  build:
+    name: integration
     runs-on: ubuntu-latest
     steps:
-      - run: echo "run after a, b, and integration"
+      - run: echo 'integration'
