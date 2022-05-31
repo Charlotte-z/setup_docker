@@ -12,4 +12,4 @@ jobs:
           name: homework
       - run: |
           test=$(grep -e "flask_image=" test.txt | sed "s/flask_image=//g")
-          echo '$test'
+          echo $test
