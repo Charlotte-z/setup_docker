@@ -10,4 +10,4 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: homework
-      - run: cat ~/test.txt
+      - run: cat test.txt
