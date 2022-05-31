@@ -14,7 +14,7 @@ jobs:
           files: |
               - 'a/**'
     outputs:
-      output1: ${{ steps.filter.outputs.workflows }}
+      output1: ${{ steps.filter.outputs.any_changed }}
 
   build:
     name: build a
