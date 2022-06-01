@@ -4,6 +4,27 @@ on: push
 
 jobs:
 
+  test:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+      - name: setup docker and login
+        uses: Charlotte-z/workflows/setup_docker@main
+        with:
+          registry: ghcr.io/geekrv/workflow
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Build image and push to GitHub Container Registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          target: production
+          platforms: linux/amd64
+          tags: |
+            ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha  }}
+
   build-a:
     uses: ./.github/workflows/build-a.yml
 
