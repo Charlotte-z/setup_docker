@@ -12,8 +12,8 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          echo '${{ github.event }}'
-          echo '::::::: ${{ github.event.pull_request }}'
+          echo '${{ toJSON(github.event) }}'
+          echo '::::::: ${{ toJSON(github.event.pull_request) }}'
       # - name: trim branch
       #   uses: Charlotte-z/workflows/trim_branch@main
       # - run: echo '${{ toJSON(github) }}'
