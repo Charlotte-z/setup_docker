@@ -13,15 +13,15 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - name: Retag to prod
-        uses: kindaninja/retag-image-ghcr@0.1.0
+      - name: Search latest semver Image
+        uses: tinact/docker.image-retag@master
         with:
-          registry: geekrv
-          image: workflow
-          current_tag: test
-          new_tag: v42-prod
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          image_name: workflow
+          image_old_tag: test
+          image_new_tag: retag
+          registry: ghcr.io/geekrv
+          registry_username: ${{ github.actor }}
+          registry_password: ${{ secrets.TOKEN }}
       # - name: Push image
       #   uses: akhilerm/tag-push-action@v2.0.0
       #   with:
