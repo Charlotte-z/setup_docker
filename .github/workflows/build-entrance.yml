@@ -27,9 +27,9 @@ jobs:
           push: true
           platforms: linux/amd64, linux/arm64
           tags: |
-            echo '${{ github.sha }}'
-            echo '${{ steps.short-sha.outputs.sha }}'
-            echo '${{ toJSON(github.event.commits) }}'
+            echo ${{ github.sha }}
+            echo ${{ steps.short-sha.outputs.sha }}
+            echo ${{ toJSON(github.event.commits) }}
             ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha }}
 
   # build-a:
