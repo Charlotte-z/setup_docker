@@ -26,7 +26,7 @@ jobs:
           target: production
           platforms: linux/amd64
           tags: |
-            ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha  }}
+            ghcr.io/geekrv/workflow:test
 
   build-a:
     uses: ./.github/workflows/build-a.yml
