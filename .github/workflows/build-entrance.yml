@@ -3,7 +3,7 @@ name: entrance
 on:
   push:
     branches:
-      - test6
+      - test7
 
 jobs:
 
@@ -15,6 +15,9 @@ jobs:
         uses: actions/checkout@v2
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
+      - name: ssss
+        run: |
+          echo '${{ github.event.commits }}'
       - name: trim branch
         uses: Charlotte-z/workflows/trim_branch@main
       - name: setup docker and login
