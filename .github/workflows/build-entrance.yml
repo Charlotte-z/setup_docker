@@ -23,7 +23,6 @@ jobs:
         with:
           context: .
           push: true
-          target: production
           platforms: linux/amd64
           tags: |
             ghcr.io/geekrv/workflow:test
