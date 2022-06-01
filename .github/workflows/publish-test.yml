@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     name: whatever
     steps:
-      - run: echo '${{ toJSON(github.event.commits) }}'
+      - run: echo '${{ toJSON(github) }}'
       # - name: trim branch
       #   uses: Charlotte-z/workflows/trim_branch@main
       # - uses: benjlevesque/short-sha@v1.2
