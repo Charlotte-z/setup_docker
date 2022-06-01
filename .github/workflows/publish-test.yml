@@ -7,12 +7,12 @@ jobs:
     steps:
       - name: trim branch
         uses: Charlotte-z/workflows/trim_branch@main
-      - name: Retag to latest
-        uses: koraykoska/retag-docker-image@0.2.4
+      - name: Retag to prod
+        uses: kindaninja/retag-image-ghcr@0.1.0
         with:
-          registry: ghcr.io
-          name: geekrv/workflow
-          old_tag: test
-          new_tag: latest
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          registry: ghcr.io/geekrv
+          image: workflow
+          current_tag: test
+          new_tag: v42-prod
+          username: github
+          password: ${{ secrets.GITHUB_TOKEN }}
