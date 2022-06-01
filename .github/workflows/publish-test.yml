@@ -13,9 +13,12 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - name: Push image
-        uses: akhilerm/tag-push-action@v2.0.0
-        with:
-          src: ghcr.io/geekrv/workflow:test
-          dst: |
-            ghcr.io/geekrv/workflow:test2
+        - name: Search latest semver Image
+          uses: tinact/docker.image-retag@master
+          with:
+            image_name: workflow
+            image_old_tag: test
+            image_new_tag: tt2
+            registry: ghcr.io/geekrv/workflow
+            registry_username: ${{ github.actor }}
+            registry_password: ${{ secrets.TOKEN }}
