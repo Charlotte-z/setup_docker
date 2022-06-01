@@ -37,12 +37,13 @@ jobs:
       #     token: ${{ secrets.TOKEN }}
       #     tag: test
       - uses: Charlotte-z/workflows/last_one_sha@main
+      - run: echo ${{ env.LAST_ONE_SHA }}
       - name: Push image
         uses: akhilerm/tag-push-action@v2.0.0
         with:
-          src: ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ env.SHA }}
+          src: ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ env.LAST_ONE_SHA }}
           dst: |
-            ghcr.io/geekrv/workflow:master.${{ env.SHA }}.${{ steps.short-sha.outputs.sha }}
+            ghcr.io/geekrv/workflow:master.${{ env.LAST_ONE_SHA }}.${{ steps.short-sha.outputs.sha }}
       # - name: Delete image
       #   uses: chipkent/action-cleanup-package@v1.0.1
       #   with:
