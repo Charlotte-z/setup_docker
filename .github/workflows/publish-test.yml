@@ -13,12 +13,11 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-        - name: Search latest semver Image
-          uses: tinact/docker.image-retag@master
-          with:
-            image_name: workflow
-            image_old_tag: test
-            image_new_tag: tt2
-            registry: ghcr.io/geekrv/workflow
-            registry_username: ${{ github.actor }}
-            registry_password: ${{ secrets.TOKEN }}
+      - name: Retag to latest
+        uses: Z-M-Huang/docker-retag-curl@0.1.0
+        with:
+          repo: ghcr.io/geekrv/workflow
+          old_tag: test
+          new_tag: ss
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
