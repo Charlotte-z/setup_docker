@@ -3,10 +3,9 @@ name: entrance
 on:
   push:
     branches:
-      - test12
+      - test13
 
 jobs:
-
   test:
     name: aww
     runs-on: ubuntu-latest
