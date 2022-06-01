@@ -13,14 +13,13 @@ jobs:
       #     registry: ghcr.io/geekrv
       #     username: ${{ github.actor }}
       #     password: ${{ secrets.TOKEN }}
-    - name: Retag to latest
-      uses: Z-M-Huang/docker-retag-curl@0.1.0
-      with:
-        repo: ghcr.io/geekrv/workflow
-        old_tag: test
-        new_tag: latest
-        username: ${{ github.actor }}
-        password: ${{ secrets.TOKEN }}
+      - name: Add Semantic Version tag to Docker Image
+        uses: shrink/actions-docker-registry-tag@v1
+        with:
+          registry: ghcr.io/geekrv
+          repository: workflow
+          target: test
+          tags: lalala
       # - name: Retag to prod
       #   uses: kindaninja/retag-image-ghcr@0.1.0
       #   with:
