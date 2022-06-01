@@ -6,7 +6,6 @@ on:
       - test12
 
 jobs:
-
   test:
     name: aww
     runs-on: ubuntu-latest
