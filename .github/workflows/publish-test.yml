@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: trim branch
         uses: Charlotte-z/workflows/trim_branch@main
+      - run: echo '${{ toJSON(github) }}'
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
       - name: Login ghcr
