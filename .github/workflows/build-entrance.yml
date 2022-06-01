@@ -3,7 +3,7 @@ name: entrance
 on:
   push:
     branches:
-      - test13
+      - test16
 
 jobs:
   test:
@@ -25,6 +25,7 @@ jobs:
           registry: ghcr.io/geekrv/workflow
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
+      - run: echo ${{ steps.short-sha.outputs.sha }}
       - name: Build image and push to GitHub Container Registry
         uses: docker/build-push-action@v3
         with:
