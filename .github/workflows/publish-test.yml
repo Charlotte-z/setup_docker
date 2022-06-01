@@ -20,13 +20,12 @@ jobs:
           dst: |
             ghcr.io/geekrv/workflow:test222222222
       - name: Delete image
-        uses: bots-house/ghcr-delete-image-action@v1.0.0
+        uses: chipkent/action-cleanup-package@v1.0.1
         with:
           # NOTE: at now only orgs is supported
-          owner: geekrv
-          name: workflow
+          package-name: geekrv/workflow
           # NOTE: using Personal Access Token
-          token: ${{ secrets.TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
           tag: test
       # - name: Retag to prod
       #   uses: kindaninja/retag-image-ghcr@0.1.0
