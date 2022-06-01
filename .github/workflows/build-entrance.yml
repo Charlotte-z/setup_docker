@@ -4,30 +4,30 @@ on: push
 
 jobs:
 
-  test:
-    name: aww
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - uses: benjlevesque/short-sha@v1.2
-        id: short-sha
-      - name: trim branch
-        uses: Charlotte-z/workflows/trim_branch@main
-      - name: setup docker and login
-        uses: Charlotte-z/workflows/setup_docker@main
-        with:
-          registry: ghcr.io/geekrv/workflow
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
-      - name: Build image and push to GitHub Container Registry
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64
-          tags: |
-            ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha  }}
+  # test:
+    # name: aww
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v2
+    #   - uses: benjlevesque/short-sha@v1.2
+    #     id: short-sha
+    #   - name: trim branch
+    #     uses: Charlotte-z/workflows/trim_branch@main
+    #   - name: setup docker and login
+    #     uses: Charlotte-z/workflows/setup_docker@main
+    #     with:
+    #       registry: ghcr.io/geekrv/workflow
+    #       username: ${{ github.actor }}
+    #       password: ${{ secrets.TOKEN }}
+    #   - name: Build image and push to GitHub Container Registry
+    #     uses: docker/build-push-action@v3
+    #     with:
+    #       context: .
+    #       push: true
+    #       platforms: linux/amd64
+    #       tags: |
+    #         ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha  }}
 
   # build-a:
   #   uses: ./.github/workflows/build-a.yml

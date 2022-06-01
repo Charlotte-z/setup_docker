@@ -13,11 +13,12 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - name: Retag to latest
-        uses: Z-M-Huang/docker-retag-curl@0.1.0
+      - name: Retag to prod
+        uses: kindaninja/retag-image-ghcr@0.1.0
         with:
-          repo: ghcr.io/geekrv/workflow
-          old_tag: test
-          new_tag: ss
-          username: ${{ github.actor }}
+          registry: ghcr.io/geekrv
+          image: workflow
+          current_tag: test
+          new_tag: v42-prod
+          username: github
           password: ${{ secrets.TOKEN }}
