@@ -1,0 +1,11 @@
+name: "last one sha"
+description: 'short sha for last one commit before merge to master'
+
+runs:
+  using: "composite"
+  steps:
+    - name: last_one_sha
+      shell: bash
+      run: |
+        temp=${{ github.event.commits[github.event.commits.length-2].id }}
+        echo "SHA=${temp:0:7}" >> $GITHUB_ENV

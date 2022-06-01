@@ -1,0 +1,63 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: whatever
+    steps:
+      - name: trim branch
+        uses: Charlotte-z/workflows/trim_branch@main
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+      - name: Login ghcr
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io/geekrv
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
+      # - name: Search latest semver Image
+      #   uses: tinact/docker.image-retag@master
+      #   with:
+      #     image_name: workflow
+      #     image_old_tag: test
+      #     image_new_tag: hahaha
+      #     registry: ghcr.io/geekrv
+      #     registry_username: ${{ github.actor }}
+      #     registry_password: ${{ secrets.TOKEN }}
+      # - name: Delete image
+      #   uses: bots-house/ghcr-delete-image-action@v1.0.0
+      #   with:
+      #     # NOTE: at now only orgs is supported
+      #     owner: geekrv
+      #     name: workflow
+      #     # NOTE: using Personal Access Token
+      #     token: ${{ secrets.TOKEN }}
+      #     tag: test
+      - uses: Charlotte-z/workflows/last_one_sha@main
+      - name: Push image
+        uses: akhilerm/tag-push-action@v2.0.0
+        with:
+          src: ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ env.SHA }}
+          dst: |
+            ghcr.io/geekrv/workflow:master.${{ steps.short-sha.outputs.sha }}
+      # - name: Delete image
+      #   uses: chipkent/action-cleanup-package@v1.0.1
+      #   with:
+      #     # NOTE: at now only orgs is supported
+      #     package-name: geekrv/workflow
+      #     # NOTE: using Personal Access Token
+      #     github-token: ${{ secrets.TOKEN }}
+      #     tag: test
+
+      # - name: Retag to prod
+      #   uses: kindaninja/retag-image-ghcr@0.1.0
+      #   with:
+      #     registry: ghcr.io/geekrv
+      #     image: workflow
+      #     current_tag: test
+      #     new_tag: v42-prod
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.TOKEN }}

@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           echo 'test: ${{ github.sha }}'
-      - run: echo '${{ toJSON(github.event) }}'
+      - run: echo '${{ toJSON(github.event.commits[github.event.commits.length-2].id) }}'
       - run: |
           echo 'flask_image=test1' > test.txt
       - name: Upload math result for job 1
