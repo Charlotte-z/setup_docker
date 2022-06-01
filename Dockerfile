@@ -1,3 +1,3 @@
 FROM nginx
 
-RUN echo 'www'
+RUN echo 'wwws'
