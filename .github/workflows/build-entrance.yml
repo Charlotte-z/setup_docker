@@ -23,7 +23,7 @@ jobs:
       - run: |
             echo ${{ github.sha }}
             echo ${{ steps.short-sha.outputs.sha }}
-            echo ${{ toJSON(github.event.commits) }}
+            echo '${{ toJSON(github.event.commits) }}'
       - name: Build image and push to GitHub Container Registry
         uses: docker/build-push-action@v3
         with:
