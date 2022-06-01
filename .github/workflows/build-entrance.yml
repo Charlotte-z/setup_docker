@@ -5,6 +5,8 @@ on: push
 jobs:
 
   test:
+    name: aww
+    runs-on: ubuntu-latest
       - name: Checkout code
         uses: actions/checkout@v2
       - uses: benjlevesque/short-sha@v1.2
