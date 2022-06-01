@@ -15,7 +15,7 @@ jobs:
       - name: setup docker and login
         uses: Charlotte-z/workflows/setup_docker@main
         with:
-          registry: ghcr.io/Charlotte-z/workflow
+          registry: ghcr.io/geekrv/workflow
           username: ${{ github.actor }}
           password: ${{ github.token }}
       - name: Build image and push to GitHub Container Registry
@@ -26,7 +26,7 @@ jobs:
           target: production
           platforms: linux/amd64
           tags: |
-            ghcr.io/Charlotte-z/workflow:test
+            ghcr.io/geekrv/workflow:test
 
   build-a:
     uses: ./.github/workflows/build-a.yml
