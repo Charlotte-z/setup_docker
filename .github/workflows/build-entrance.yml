@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v2
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
+      - name: trim branch
+        uses: Charlotte-z/workflows/trim_branch@main
       - name: setup docker and login
         uses: Charlotte-z/workflows/setup_docker@main
         with:
@@ -25,14 +27,14 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/geekrv/workflow:test
+            ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha  }}
 
-  build-a:
-    uses: ./.github/workflows/build-a.yml
+  # build-a:
+  #   uses: ./.github/workflows/build-a.yml
 
-  build-b:
-    uses: ./.github/workflows/build-b.yml
+  # build-b:
+  #   uses: ./.github/workflows/build-b.yml
 
-  integration:
-    needs: [build-b, build-a]
-    uses: ./.github/workflows/test-integration.yml
+  # integration:
+  #   needs: [build-b, build-a]
+  #   uses: ./.github/workflows/test-integration.yml
