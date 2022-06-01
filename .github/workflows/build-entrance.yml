@@ -3,7 +3,7 @@ name: entrance
 on:
   push:
     branches:
-      - test8
+      - test10
 
 jobs:
 
@@ -34,6 +34,7 @@ jobs:
           platforms: linux/amd64, linux/arm64
           tags: |
             ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha }}
+            ghcr.io/geekrv/workflow:main.${{ steps.short-sha.outputs.sha }}-unavailable
 
   # build-a:
   #   uses: ./.github/workflows/build-a.yml
