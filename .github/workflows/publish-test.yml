@@ -15,7 +15,7 @@ jobs:
         uses: tinact/docker.image-retag@master
         with:
           image_name: workflow
-          image_old_tag: newnewtag
+          image_old_tag: t.89a43c5
           image_new_tag: aaaaa
           registry: ghcr.io/geekrv
           registry_username: ${{ github.actor }}
@@ -28,7 +28,7 @@ jobs:
           name: workflow
           # NOTE: using Personal Access Token
           token: ${{ secrets.TOKEN }}
-          tag: newnewtag
+          tag: t.89a43c5
       # - name: Push image
       #   uses: akhilerm/tag-push-action@v2.0.0
       #   with:
