@@ -16,10 +16,19 @@ jobs:
         with:
           image_name: workflow
           image_old_tag: test
-          image_new_tag: retag
+          image_new_tag: newtag
           registry: ghcr.io/geekrv
           registry_username: ${{ github.actor }}
           registry_password: ${{ secrets.TOKEN }}
+      - name: Delete image
+        uses: bots-house/ghcr-delete-image-action@v1.0.0
+        with:
+          # NOTE: at now only orgs is supported
+          owner: ghcr.io/geekrv
+          name: workflow
+          # NOTE: using Personal Access Token
+          token: ${{ secrets.TOKEN }}
+          tag: test
       # - name: Push image
       #   uses: akhilerm/tag-push-action@v2.0.0
       #   with:
