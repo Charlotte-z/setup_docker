@@ -20,5 +20,5 @@ jobs:
           image: workflow
           current_tag: test
           new_tag: v42-prod
-          username: github
+          username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
