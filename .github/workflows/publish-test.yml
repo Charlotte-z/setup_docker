@@ -7,12 +7,12 @@ jobs:
     steps:
       - name: trim branch
         uses: Charlotte-z/workflows/trim_branch@main
-      - name: Retag to prod
-        uses: kindaninja/retag-image-ghcr@0.1.0
+      - name: Search latest semver Image
+        uses: tinact/docker.image-retag@master
         with:
+          image_name: workflow
+          image_old_tag: test
+          image_new_tag: tagtest
           registry: ghcr.io/geekrv
-          image: workflow
-          current_tag: test
-          new_tag: v42-prod
-          username: github
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry_username: ${{ github.actor }}
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
