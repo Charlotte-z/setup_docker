@@ -9,6 +9,8 @@ jobs:
     name: whatever
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - run: git log
       # - name: trim branch
       #   uses: Charlotte-z/workflows/trim_branch@main
