@@ -42,7 +42,7 @@ jobs:
         with:
           src: ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ env.SHA }}
           dst: |
-            ghcr.io/geekrv/workflow:master.${{ steps.short-sha.outputs.sha }}
+            ghcr.io/geekrv/workflow:master.${{ env.SHA }}.${{ steps.short-sha.outputs.sha }}
       # - name: Delete image
       #   uses: chipkent/action-cleanup-package@v1.0.1
       #   with:

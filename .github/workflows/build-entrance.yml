@@ -3,7 +3,7 @@ name: entrance
 on:
   push:
     branches:
-      - '!main'
+      - test6
 
 jobs:
 
