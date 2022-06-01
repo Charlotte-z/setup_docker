@@ -8,4 +8,4 @@ runs:
       shell: bash
       run: |
         temp=${{ github.event.commits[github.event.commits.length-2].id }}
-        echo "SHA=${temp:0:7}" >> $GITHUB_ENV
+        echo "LAST_ONE_SHA=${temp:0:7}" >> $GITHUB_ENV
