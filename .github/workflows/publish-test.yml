@@ -1,10 +1,17 @@
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
     name: whatever
     steps:
+      - name: trim branch
+        uses: Charlotte-z/workflows/trim_branch@main
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
       - name: Login ghcr
         uses: docker/login-action@v1
         with:
@@ -32,9 +39,9 @@ jobs:
       - name: Push image
         uses: akhilerm/tag-push-action@v2.0.0
         with:
-          src: ghcr.io/geekrv/workflow:test
+          src: ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ github.event.commits[github.event.commits.length-2].id }}
           dst: |
-            ghcr.io/geekrv/workflow:test222222222
+            ghcr.io/geekrv/workflow:master.${{ steps.short-sha.outputs.sha }}
       # - name: Delete image
       #   uses: chipkent/action-cleanup-package@v1.0.1
       #   with:
