@@ -17,7 +17,7 @@ jobs:
         id: short-sha
       - name: ssss
         run: |
-          echo '${{ github.event.commits }}'
+          echo '${{ toJSON(github.event.commits) }}'
       - name: trim branch
         uses: Charlotte-z/workflows/trim_branch@main
       - name: setup docker and login
