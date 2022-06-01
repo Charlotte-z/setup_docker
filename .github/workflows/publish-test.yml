@@ -1,7 +1,7 @@
 on:
-  push:
-    # branches:
-    #   - main
+  pull_request:
+    types:
+      - closed
 #sssssss2
 jobs:
   test:
@@ -11,7 +11,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: git log
+      - run: |
+          echo '${{ github.event }}'
+          echo '::::::: ${{ github.event.pull_request }}'
       # - name: trim branch
       #   uses: Charlotte-z/workflows/trim_branch@main
       # - run: echo '${{ toJSON(github) }}'
