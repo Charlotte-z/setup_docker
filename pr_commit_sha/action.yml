@@ -1,0 +1,20 @@
+name: "pr commit sha"
+description: 'get the last one commit sha before merge pr'
+
+runs:
+  using: "composite"
+  steps:
+    - name: install jq
+      shell: bash
+      run: |
+        apt-get install jq
+    - name: pr_commit_sha
+      shell: bash
+      run: |
+        json=`curl -s ${{ github.event.pull_request._links.commits }}`
+        length=`echo $json | jq 'length' `
+        length=$(expr $length - 1)
+        for index in `seq 0 $length`
+        do
+          last_one_commit_sha=$(echo $json | jq ".[$index].sha";)
+        done

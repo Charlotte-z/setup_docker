@@ -11,8 +11,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - uses: Charlotte-z/workflows/pr_commit_sha@main
       - run: |
-          echo '${{ toJSON(github.event) }}'
+          echo '${{ env.last_one_commit_sha }}'
       # - name: trim branch
       #   uses: Charlotte-z/workflows/trim_branch@main
       # - run: echo '${{ toJSON(github) }}'
