@@ -24,4 +24,4 @@ runs:
         do
           last_one_commit_sha=$(echo $json | jq ".[$index].sha";)
         done
-        echo "last_one_commit_sha=${last_one_commit_sha:0:${{ inputs.length }}}" >> $GITHUB_ENV
+        echo "last_one_commit_sha=${last_one_commit_sha:1:${{ inputs.length }}}" >> $GITHUB_ENV
