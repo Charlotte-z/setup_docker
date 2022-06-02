@@ -23,7 +23,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
 
-      - uses: Charlotte-z/workflows/last_one_sha@main
+      - uses: Charlotte-z/workflows/pr_commit_sha@main
       - run: echo ${{ env.LAST_ONE_SHA }}
       - name: Push image
         uses: akhilerm/tag-push-action@v2.0.0
