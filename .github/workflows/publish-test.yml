@@ -12,29 +12,24 @@ jobs:
         with:
           fetch-depth: 0
       - uses: Charlotte-z/workflows/pr_commit_sha@test16
-      - run: |
-          echo '${{ env.last_one_commit_sha }}'
-      # - name: trim branch
-      #   uses: Charlotte-z/workflows/trim_branch@main
-      # - run: echo '${{ toJSON(github) }}'
-      # - uses: benjlevesque/short-sha@v1.2
-      #   id: short-sha
-      # - name: Login ghcr
-      #   uses: docker/login-action@v1
-      #   with:
-      #     registry: ghcr.io/geekrv
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.TOKEN }}
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+      - name: Login ghcr
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io/geekrv
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
 
-      # - uses: Charlotte-z/workflows/last_one_sha@main
-      # - run: echo ${{ env.LAST_ONE_SHA }}
-      # - name: Push image
-      #   uses: akhilerm/tag-push-action@v2.0.0
-      #   with:
-      #     src: ghcr.io/geekrv/workflow:main.${{ env.LAST_ONE_SHA }}-unavailable
-      #     dst: |
-      #       ghcr.io/geekrv/workflow:main.${{ steps.short-sha.outputs.sha }}
-            
+      - uses: Charlotte-z/workflows/last_one_sha@main
+      - run: echo ${{ env.LAST_ONE_SHA }}
+      - name: Push image
+        uses: akhilerm/tag-push-action@v2.0.0
+        with:
+          src: ghcr.io/geekrv/workflow:${{ github.event.pull_request.head.ref }}.${{ env.last_one_commit_sha }}
+          dst: |
+            ghcr.io/geekrv/workflow:main.${{ steps.short-sha.outputs.sha }}
+
       # - name: Search latest semver Image
       #   uses: tinact/docker.image-retag@master
       #   with:
