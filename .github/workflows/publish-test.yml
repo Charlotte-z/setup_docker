@@ -2,7 +2,7 @@ on:
   pull_request:
     types:
       - closed
-#sssssss
+#ssssssss
 jobs:
   test:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
