@@ -2,8 +2,6 @@ name: entrance
 
 on:
   push:
-    branches:
-      - test16
 
 jobs:
   test:
