@@ -7,7 +7,7 @@ runs:
     - name: install jq
       shell: bash
       run: |
-        apt-get install jq
+        sudo apt-get install jq
     - name: pr_commit_sha
       shell: bash
       run: |
