@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - uses: Charlotte-z/workflows/pr_commit_sha@main
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
       - name: ssss
