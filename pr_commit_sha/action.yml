@@ -18,3 +18,4 @@ runs:
         do
           last_one_commit_sha=$(echo $json | jq ".[$index].sha";)
         done
+        echo "last_one_commit_sha=$last_one_commit_sha" >> $GITHUB_ENV
