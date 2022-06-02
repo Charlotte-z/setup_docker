@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: Charlotte-z/workflows/pr_commit_sha@main
+      - run: echo '${{ toJSON(github) }}'
       - uses: benjlevesque/short-sha@v1.2
         id: short-sha
       - name: Login ghcr
