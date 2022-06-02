@@ -2,8 +2,6 @@ name: entrance
 
 on:
   push:
-    branches:
-      - test16
 
 jobs:
   test:
@@ -16,7 +14,7 @@ jobs:
         id: short-sha
       - name: ssss
         run: |
-          echo '${{ toJSON(github.event.commits) }}'
+          echo '${{ toJSON(github) }}'
       - name: trim branch
         uses: Charlotte-z/workflows/trim_branch@main
       - name: setup docker and login
