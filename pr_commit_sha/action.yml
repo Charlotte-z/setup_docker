@@ -11,7 +11,7 @@ runs:
     - name: pr_commit_sha
       shell: bash
       run: |
-        json=`curl -s ${{ github.event.pull_request._links.commits }}`
+        json=`curl -s ${{ github.event.pull_request._links.commits.href }}`
         length=`echo $json | jq 'length' `
         length=$(expr $length - 1)
         for index in `seq 0 $length`
