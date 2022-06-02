@@ -5,7 +5,7 @@ on:
 #ssssssss
 jobs:
   test:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     name: whatever
     steps:
@@ -23,12 +23,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
 
-      - uses: Charlotte-z/workflows/last_one_sha@main
+      - uses: Charlotte-z/workflows/pr_commit_sha@main
+      - uses: Charlotte-z/workflows/pr_branch_name@main
       - run: echo ${{ env.LAST_ONE_SHA }}
       - name: Push image
         uses: akhilerm/tag-push-action@v2.0.0
         with:
-          src: ghcr.io/geekrv/workflow:${{ github.event.pull_request.head.ref }}.${{ env.last_one_commit_sha }}
+          src: ghcr.io/geekrv/workflow:${{ env.PR_BRANCH_NAME }}.${{ env.last_one_commit_sha }}
           dst: |
             ghcr.io/geekrv/workflow:main.${{ steps.short-sha.outputs.sha }}
 
