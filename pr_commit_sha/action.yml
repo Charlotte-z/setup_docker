@@ -4,7 +4,7 @@ description: 'get the last one commit sha before merge pr'
 inputs:
   length:
     description: "sha length, default 7"
-    required: true
+    required: false
     default: 7
 
 runs:
