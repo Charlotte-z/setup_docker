@@ -45,10 +45,3 @@ jobs:
   # integration:
   #   needs: [build-b, build-a]
   #   uses: ./.github/workflows/test-integration.yml
-
-
-  for index in `seq 0 $length`
-do
-        echo $index
-        $(echo $json | jq ".[$index].sha";)
-done
