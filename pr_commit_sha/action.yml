@@ -1,6 +1,12 @@
 name: "pr commit sha"
 description: 'get the last one commit sha before merge pr'
 
+inputs:
+  length:
+    description: "sha length, default 7"
+    required: true
+    default: 7
+
 runs:
   using: "composite"
   steps:
@@ -18,4 +24,4 @@ runs:
         do
           last_one_commit_sha=$(echo $json | jq ".[$index].sha";)
         done
-        echo "last_one_commit_sha=$last_one_commit_sha" >> $GITHUB_ENV
+        echo "last_one_commit_sha=${last_one_commit_sha:0:${{ inputs.length }}}" >> $GITHUB_ENV
