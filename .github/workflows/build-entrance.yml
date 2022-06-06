@@ -22,7 +22,7 @@ jobs:
           old_tag: test7.2ec8b53
           new_tag: wwwwww
           username: github
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN }}
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
       # https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=3&&per_page=100
