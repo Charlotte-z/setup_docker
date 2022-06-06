@@ -19,8 +19,8 @@ jobs:
           docker pull ghcr.io/geekrv/workflow:test16.c89e56b
           docker image ls
           docker inspect 2eba714da449
-          docker tag ghcr.io/geekrv/workflow ghcr.io/geekrv/workflow:mainbalabal
-          docker rmi ghcr.io/geekrv/workflow:test16.c89e56b
+          docker tag ghcr.io/geekrv/workflow:test16.c89e56b ghcr.io/geekrv/workflow:mainbalabal
+          docker rmi -f ghcr.io/geekrv/workflow:test16.c89e56b
           docker push ghcr.io/geekrv/workflow:mainbalabal
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
