@@ -18,8 +18,8 @@ jobs:
       - name: Retag to latest
         uses: koraykoska/retag-docker-image@0.2.4
         with:
-          registry: ghcr.io/geekrv/workflow
-          name: my-awesome-docker-image/my-package
+          registry: ghcr.io
+          name: geekrv/workflow
           old_tag: test7.2ec8b53
           new_tag: wwad
           username: ${{ github.actor }}
