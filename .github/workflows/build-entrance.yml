@@ -15,6 +15,9 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
+      - uses: camargo/delete-untagged-action@v1
+        with:
+          github-token: ${{ secrets.TOKEN }}
       - uses: chipkent/action-cleanup-package@v1.0.1
         with:
           package-name: ghcr.io/geekrv/workflow
