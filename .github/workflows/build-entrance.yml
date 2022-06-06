@@ -15,15 +15,15 @@ jobs:
       #     registry: ghcr.io/geekrv
       #     username: ${{ github.actor }}
       #     password: ${{ secrets.TOKEN }}
-      - name: Retag to latest
-        uses: koraykoska/retag-docker-image@0.2.4
+      - name: Search latest semver Image
+        uses: tinact/docker.image-retag@master
         with:
+          image_name: geekrv/workflow
+          image_old_tag: do_not_use
+          image_new_tag: retag
           registry: ghcr.io
-          name: geekrv/workflow
-          old_tag: test7.2ec8b53
-          new_tag: wwad
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          registry_username: ${{ github.actor }}
+          registry_password: ${{ secrets.TOKEN }}
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
       # https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=3&&per_page=100
