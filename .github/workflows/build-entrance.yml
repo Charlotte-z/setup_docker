@@ -13,9 +13,11 @@ jobs:
           registry: ghcr.io/geekrv/workflow
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - run: |
-          docker pull ghcr.io/geekrv/workflow:main.871eed6
-          docker inspect 46994eb45f83
+      - uses: chipkent/action-cleanup-package@v1.0.1
+        with:
+          package-name: ghcr.io/geekrv/workflow
+          tag: test16.f9e6a51
+          github-token: ${{ secrets.TOKEN }}
 
   # test:
   #   name: aww
