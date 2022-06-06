@@ -12,8 +12,8 @@ jobs:
           -X DELETE \
           -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/orgs/geekrv/packages/container/workflow/versions/test16.f9e6a51
-      # https://api.github.com/users/USERNAME/packages/PACKAGE_TYPE/PACKAGE_NAME/versions/PACKAGE_VERSION_ID
+          https://api.github.com/orgs/geekrv/packages/container/workflow/versions/O_kgDOBluUNQ
+      #https://api.github.com/users/USERNAME/packages/PACKAGE_TYPE/PACKAGE_NAME/versions/PACKAGE_VERSION_ID
 
 
 # curl -i \
