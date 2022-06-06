@@ -4,34 +4,43 @@ on:
   push:
 
 jobs:
-  test:
-    name: aww
+  delete_test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - uses: benjlevesque/short-sha@v1.2
-        id: short-sha
-      - name: ssss
-        run: |
-          echo '${{ toJSON(github) }}'
-      - name: trim branch
-        uses: Charlotte-z/workflows/trim_branch@main
-      - name: setup docker and login
-        uses: Charlotte-z/workflows/setup_docker@main
+      - uses: chipkent/action-cleanup-package@v1.0.1
         with:
-          registry: ghcr.io/geekrv/workflow
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
-      - run: echo ${{ steps.short-sha.outputs.sha }}
-      - name: Build image and push to GitHub Container Registry
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64, linux/arm64
-          tags: |
-            ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha }}
+          package-name: geekrv/workflow
+          tag: test13.56534a5
+          github-token: ${{ secrets.TOKEN }}
+
+  # test:
+  #   name: aww
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     - uses: benjlevesque/short-sha@v1.2
+  #       id: short-sha
+  #     - name: ssss
+  #       run: |
+  #         echo '${{ toJSON(github) }}'
+  #     - name: trim branch
+  #       uses: Charlotte-z/workflows/trim_branch@main
+  #     - name: setup docker and login
+  #       uses: Charlotte-z/workflows/setup_docker@main
+  #       with:
+  #         registry: ghcr.io/geekrv/workflow
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.TOKEN }}
+  #     - run: echo ${{ steps.short-sha.outputs.sha }}
+  #     - name: Build image and push to GitHub Container Registry
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: .
+  #         push: true
+  #         platforms: linux/amd64, linux/arm64
+  #         tags: |
+  #           ghcr.io/geekrv/workflow:${{ env.TRIM_BRANCH }}.${{ steps.short-sha.outputs.sha }}
 
   # build-a:
   #   uses: ./.github/workflows/build-a.yml
