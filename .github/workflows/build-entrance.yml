@@ -16,9 +16,9 @@ jobs:
           package_type: "container"   # Default is container because the action was design only for containers at first
           selector: |
               type=tagCount;operator=greaterThan;value=0
-              type=tags;operator=startsWith;value=test16.f9e6a51
-          # excluder: |
-          #     type=tags;operator=equals;value=pr-1-ee20adc
+              type=tags;operator=endWith;value=56534a5
+          excluder: |
+              type=tags;operator=equals;value=main.56534a5-unavailable
           dry-run: "0"
       # - run: |
       #     curl \
