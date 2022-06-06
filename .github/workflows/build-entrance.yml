@@ -8,11 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl \
-          -X DELETE \
-          -s \
-          -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
-          ghcr.io/geekrv/workflow:test16.f9e6a51
+          docker pull ghcr.io/geekrv/workflow:main.871eed6
+          docker image ls
 
   # test:
   #   name: aww
