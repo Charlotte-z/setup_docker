@@ -15,15 +15,14 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - name: Add Semantic Version tag to Docker Image
-        uses: shrink/actions-docker-registry-tag@v1
+      - name: Retag to latest
+        uses: Z-M-Huang/docker-retag-curl@0.1.0
         with:
-          registry: ghcr.io
-          repository: geekrv/workflow
-          target: test7.2ec8b53
-          token: ${{ secrets.TOKEN }}
-          tags: test7123
-      # curl \
+          repo: ghcr.io/geekrv/workflow
+          old_tag: test7.2ec8b53
+          new_tag: wwwwww
+          username: github
+          password: ${{ secrets.GITHUB_TOKEN }}
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
       # https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=3&&per_page=100
