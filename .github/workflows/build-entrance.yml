@@ -15,9 +15,12 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - uses: camargo/delete-untagged-action@v1
+      - name: purge packages
+        uses: dylanratcliffe/delete-untagged-containers@main
         with:
-          github-token: ${{ secrets.TOKEN }}
+          package_name: ghcr.io/geekrv/workflow
+          # This is a person access token
+          token: ${{ secrets.TOKEN }}
       - uses: chipkent/action-cleanup-package@v1.0.1
         with:
           package-name: ghcr.io/geekrv/workflow
