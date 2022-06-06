@@ -21,6 +21,7 @@ jobs:
           registry: ghcr.io
           repository: geek/workflow
           target: test7.2ec8b53
+          token: ${{ secrets.TOKEN }}
           tags: test7.2ec8b53-123
       # curl \
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
