@@ -17,9 +17,10 @@ jobs:
           password: ${{ secrets.TOKEN }}
       - run:
           docker pull ghcr.io/geekrv/workflow:test16.c89e56b
+          docker image ls
           docker tag workflow ghcr.io/geekrv/workflow:mainbalabal
-          docker rmi ghcr.io/geekrv/workflow:test16.c89e56b
-          docker push ghcr.io/geekrv/workflow:mainbalabal
+          # docker rmi ghcr.io/geekrv/workflow:test16.c89e56b
+          # docker push ghcr.io/geekrv/workflow:mainbalabal
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
       # https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=3&&per_page=100
