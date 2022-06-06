@@ -7,25 +7,11 @@ jobs:
   delete_test:
     runs-on: ubuntu-latest
     steps:
-      - id: version
-        uses: battila7/get-version-action@v2
-      - name: Login ghcr
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io/geekrv
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
-      - name: purge packages
-        uses: dylanratcliffe/delete-untagged-containers@main
-        with:
-          package_name: ghcr.io/geekrv/workflow
-          # This is a person access token
-          token: ${{ secrets.TOKEN }}
-      - uses: chipkent/action-cleanup-package@v1.0.1
-        with:
-          package-name: ghcr.io/geekrv/workflow
-          tag: main.b36572a
-          github-token: ${{ secrets.TOKEN }}
+      - run: |
+          curl \
+          -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/orgs/geekrv/packages/container/workflow/versions
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
       # https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=3&&per_page=100
