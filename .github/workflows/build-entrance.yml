@@ -9,12 +9,12 @@ jobs:
     steps:
       - id: version
         uses: battila7/get-version-action@v2
-      - name: Login ghcr
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io/geekrv
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+      # - name: Login ghcr
+      #   uses: docker/login-action@v1
+      #   with:
+      #     registry: ghcr.io/geekrv
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.TOKEN }}
       - name: Retag to latest
         uses: Z-M-Huang/docker-retag-curl@0.1.0
         with:
