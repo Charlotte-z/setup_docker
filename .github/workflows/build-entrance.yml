@@ -7,11 +7,21 @@ jobs:
   delete_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: chipkent/action-cleanup-package@v1.0.1
+      - id: version
+        uses: battila7/get-version-action@v2
+      - name: Login ghcr
+        uses: docker/login-action@v1
         with:
-          package-name: geekrv/workflow
-          tag: "test7.2ec8b53"
-          github-token: ${{ secrets.TOKEN }}
+          registry: ghcr.io/geekrv
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
+      - name: Add Semantic Version tag to Docker Image
+        uses: shrink/actions-docker-registry-tag@v1
+        with:
+          registry: ghcr.io
+          repository: geek/workflow
+          target: test7.2ec8b53
+          tags: test7.2ec8b53-123
       # curl \
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
