@@ -19,7 +19,7 @@ jobs:
         uses: tinact/docker.image-retag@master
         with:
           image_name: geekrv/workflow
-          image_old_tag: do_not_use
+          image_old_tag: test8.a1afdda
           image_new_tag: retag
           registry: ghcr.io
           registry_username: ${{ github.actor }}
