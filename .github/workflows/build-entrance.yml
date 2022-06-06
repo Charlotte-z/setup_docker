@@ -7,6 +7,12 @@ jobs:
   delete_test:
     runs-on: ubuntu-latest
     steps:
+      - name: setup docker and login
+        uses: Charlotte-z/workflows/setup_docker@main
+        with:
+          registry: ghcr.io/geekrv/workflow
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
       - run: |
           docker pull ghcr.io/geekrv/workflow:main.871eed6
           docker image ls
