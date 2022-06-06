@@ -15,13 +15,11 @@ jobs:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
-      - run: |
-          docker pull --platform linux/arm64,linux/amd64 ghcr.io/geekrv/workflow:test16.c89e56b
-          docker image ls
-          docker inspect 2eba714da449
-          docker tag ghcr.io/geekrv/workflow:test16.c89e56b ghcr.io/geekrv/workflow:mainbalabal
-          docker rmi -f ghcr.io/geekrv/workflow:test16.c89e56b
-          docker push ghcr.io/geekrv/workflow:mainbalabal
+      - uses: chipkent/action-cleanup-package@v1.0.1
+        with:
+          package-name: geekrv/workflow
+          tag: main.b36572a
+          github-token: ${{ secrets.TOKEN }}
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
       # https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=3&&per_page=100
