@@ -16,7 +16,7 @@ jobs:
           package_type: "container"   # Default is container because the action was design only for containers at first
           selector: |
               type=tagCount;operator=greaterThan;value=0
-              type=tags;operator=endWith;value=56534a5
+              type=tags;operator=equals;value=test13.56534a5
           excluder: |
               type=tags;operator=equals;value=main.56534a5-unavailable
           dry-run: "0"
