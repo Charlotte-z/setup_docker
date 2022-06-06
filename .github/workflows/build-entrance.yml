@@ -16,12 +16,13 @@ jobs:
       #     username: ${{ github.actor }}
       #     password: ${{ secrets.TOKEN }}
       - name: Retag to latest
-        uses: Z-M-Huang/docker-retag-curl@0.1.0
+        uses: koraykoska/retag-docker-image@0.2.4
         with:
-          repo: ghcr.io/geekrv/workflow
+          registry: ghcr.io/geekrv/workflow
+          name: my-awesome-docker-image/my-package
           old_tag: test7.2ec8b53
-          new_tag: wwwwww
-          username: github
+          new_tag: wwad
+          username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
