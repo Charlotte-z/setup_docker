@@ -7,25 +7,16 @@ jobs:
   delete_test:
     runs-on: ubuntu-latest
     steps:
-      - name: Clean GHCR packages
-        uses: cresh-io/action-ghcr-batch-delete-versions@v1
-        with:
-          github-access-token: "${{ secrets.TOKEN }}"
-          org: "geekrv"
-          package_name: "workflow"
-          package_type: "container"   # Default is container because the action was design only for containers at first
-          selector: |
-              type=tagCount;operator=greaterThan;value=0
-              type=tags;operator=equals;value=test13.56534a5
-          excluder: |
-              type=tags;operator=equals;value=main.56534a5-unavailable
-          dry-run: "0"
-      # - run: |
-      #     curl \
-      #     -X DELETE \
-      #     -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
-      #     -H "Accept: application/vnd.github.v3+json" \
-      #     https://api.github.com/orgs/geekrv/packages/container/workflow/versions/106665013
+      - run: |
+          curl \
+          -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page=0&&per_page=100
+      # curl \
+      # -X DELETE \
+      # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
+      # -H "Accept: application/vnd.github.v3+json" \
+      # https://api.github.com/orgs/geekrv/packages/container/workflow/versions/O_kgDOBluUNQ
       #https://api.github.com/users/USERNAME/packages/PACKAGE_TYPE/PACKAGE_NAME/versions/PACKAGE_VERSION_ID
 
 
