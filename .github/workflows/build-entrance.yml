@@ -19,7 +19,7 @@ jobs:
         uses: shrink/actions-docker-registry-tag@v1
         with:
           registry: ghcr.io
-          repository: geek/workflow
+          repository: geekrv/workflow
           target: test7.2ec8b53
           token: ${{ secrets.TOKEN }}
           tags: test7.2ec8b53-123
