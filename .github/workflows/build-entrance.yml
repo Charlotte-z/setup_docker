@@ -7,17 +7,11 @@ jobs:
   delete_test:
     runs-on: ubuntu-latest
     steps:
-      - name: setup docker and login
-        uses: Charlotte-z/workflows/setup_docker@main
-        with:
-          registry: ghcr.io/geekrv/workflow
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
-      - uses: chipkent/action-cleanup-package@v1.0.1
-        with:
-          package-name: ghcr.io/geekrv/workflow
-          tag: test16.f9e6a51
-          github-token: ${{ secrets.TOKEN }}
+      - run: |
+          curl \
+          -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/geekrv/workflow
 
   # test:
   #   name: aww
