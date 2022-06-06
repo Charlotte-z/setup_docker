@@ -15,7 +15,7 @@ jobs:
           password: ${{ secrets.TOKEN }}
       - run: |
           docker pull ghcr.io/geekrv/workflow:main.871eed6
-          docker image ls
+          docker inspect 46994eb45f83
 
   # test:
   #   name: aww
