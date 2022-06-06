@@ -10,7 +10,7 @@ jobs:
       - uses: chipkent/action-cleanup-package@v1.0.1
         with:
           package-name: geekrv/workflow
-          tag: test7.2ec8b53
+          tag: "test7.2ec8b53"
           github-token: ${{ secrets.TOKEN }}
       # curl \
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
