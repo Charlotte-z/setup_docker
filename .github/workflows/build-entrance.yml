@@ -7,12 +7,21 @@ jobs:
   delete_test:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          curl \
-          -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/orgs/geekrv/packages/container/workflow/versions?page={0}&type=all
-        # -X DELETE \
+      - name: Retag to prod
+        uses: kindaninja/retag-image-ghcr@0.1.0
+        with:
+          registry: geekrv
+          image: workflow
+          current_tag: test16.f9e6a51
+          new_tag: v42-prod
+          username: github
+          password: ${{ secrets.TOKEN }}
+      # - run: |
+      #     curl \
+      #     -X DELETE \
+      #     -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
+      #     -H "Accept: application/vnd.github.v3+json" \
+      #     https://api.github.com/orgs/geekrv/packages/container/workflow/versions/106665013
       #https://api.github.com/users/USERNAME/packages/PACKAGE_TYPE/PACKAGE_NAME/versions/PACKAGE_VERSION_ID
 
 
