@@ -9,6 +9,7 @@ jobs:
     steps:
       - run: |
           curl \
+          -X DELETE \
           -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/users/USERNAME/packages/PACKAGE_TYPE/PACKAGE_NAME/versions/PACKAGE_VERSION_ID
