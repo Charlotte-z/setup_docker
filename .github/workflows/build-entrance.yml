@@ -18,7 +18,7 @@ jobs:
         with:
           source: geekrv/workflow:main.b36572a
           target: |
-            aha.main.b36572a
+            geekrv/workflow:aha.main.b36572a
       # curl \
       # -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
       # -H "Accept: application/vnd.github.v3+json" \
