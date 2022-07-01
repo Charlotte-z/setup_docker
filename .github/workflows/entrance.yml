@@ -12,4 +12,4 @@ jobs:
     # if: needs.workflow-a.result == 'success'
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJSON(needs.workflow-a.outputs) }}
+      - run: echo ${{ toJSON(needs.workflow-a) }}
