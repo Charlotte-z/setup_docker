@@ -18,3 +18,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'run 2'
+    outputs:
+      rs: 'done'
