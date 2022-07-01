@@ -12,4 +12,4 @@ jobs:
     # if: needs.workflow-a.result == 'success'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.workflow-a.jobs.build_backend_go }}"
+      - run: echo "${{ github.event.workflow-a.jobs }}"
