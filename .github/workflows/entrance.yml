@@ -6,6 +6,9 @@ jobs:
   workflow-a:
     uses: ./.github/workflows/workflow-a.yml
     secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'awd'
 
   integration:
     needs: [workflow-a]

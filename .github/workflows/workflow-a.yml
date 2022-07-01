@@ -14,8 +14,6 @@ jobs:
   build_backend_go:
     needs: is_files_changed
     name: build backend go image
-    outputs:
-      rs: 'done'
     if: needs.is_files_changed.outputs.file_changed == 'false'
     runs-on: ubuntu-latest
     steps:
