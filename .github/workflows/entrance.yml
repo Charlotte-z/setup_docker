@@ -6,13 +6,10 @@ jobs:
   workflow-a:
     uses: ./.github/workflows/workflow-a.yml
     secrets: inherit
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'awd'
 
   integration:
     needs: [workflow-a]
     # if: needs.workflow-a.result == 'success'
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJSON(needs.workflow-a) }}
+      - run: echo ${{ toJSON(needs.workflow-a.build_backend_go) }}
