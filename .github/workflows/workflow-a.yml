@@ -1,0 +1,20 @@
+name: build backend go
+
+on:
+  workflow_call:
+
+jobs:
+  is_files_changed:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'run 1'
+    outputs:
+      file_changed: 'true'
+
+  build_backend_go:
+    needs: is_files_changed
+    name: build backend go image
+    if: needs.is_files_changed.outputs.file_changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'run 2'

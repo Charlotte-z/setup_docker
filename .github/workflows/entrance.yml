@@ -1,0 +1,15 @@
+name: entrance
+
+on: push
+
+jobs:
+  workflow-a:
+    uses: ./.github/workflows/workflow-a.yml
+    secrets: inherit
+
+  integration:
+    needs: [workflow-a]
+    # if: needs.workflow-a.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ toJSON(needs.workflow-a.result) }}
