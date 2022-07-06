@@ -18,4 +18,4 @@ jobs:
         with:
           src: ghcr.io/geekrv/workflow:retag
           dst: |
-            ghcr.io/geekrv/workflow:development-eeenv
+            ghcr.io/geekrv/workflow:mainbalabal
