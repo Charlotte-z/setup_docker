@@ -8,11 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: dorny/paths-filter@v2
+      - uses: tj-actions/changed-files@v22
         id: filter
         with:
-          filters: |
-            src:
-              - 'src/**'
-      - run: |
-          echo ${{ steps.filter.outputs.any_changed }}
+          files: |
+              src/**
+    outputs:
+      file_changed: ${{ steps.filter.outputs.any_changed }}
