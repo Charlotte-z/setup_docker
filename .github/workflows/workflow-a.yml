@@ -7,14 +7,15 @@ jobs:
   is_files_changed:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'run 1'
-    outputs:
-      file_changed: 'true'
-
-  build_backend_go:
-    needs: is_files_changed
-    name: build backend go image
-    if: needs.is_files_changed.outputs.file_changed == 'false'
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'run 2'
+      - name: Login ghcr
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io/geekrv
+          username: ${{ github.actor }}
+          password: ${{ secrets.PACKAGES_TOKEN }}
+      - name: Push image
+        uses: akhilerm/tag-push-action@v2.0.0
+        with:
+          src: ghcr.io/geekrv/workflow:retag
+          dst: |
+            ghcr.io/geekrv/workflow:development-eeenv
