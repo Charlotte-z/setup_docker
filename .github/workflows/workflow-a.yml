@@ -20,4 +20,5 @@ jobs:
               - 'src/a.txt'
       - run: |
           echo ${{ steps.filter.outputs.all }}
+          echo ${{ steps.filter.outputs.a }}
           echo ${{ steps.filter.outputs.b }}
