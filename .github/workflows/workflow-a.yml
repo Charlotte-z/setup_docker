@@ -12,13 +12,10 @@ jobs:
         id: filter
         with:
           filters: |
-            all:
-              - 'src/**'
             b:
               - 'src/b.txt'
             a:
               - 'src/a.txt'
       - run: |
-          echo ${{ toJSON(steps.filter.outputs) }}
           echo ${{ steps.filter.outputs.a }}
           echo ${{ steps.filter.outputs.b }}
