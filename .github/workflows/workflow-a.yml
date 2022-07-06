@@ -13,4 +13,11 @@ jobs:
         with:
           files: |
               src/**
-      - run: echo ${{ steps.filter.outputs.any_changed }}
+      - uses: tj-actions/changed-files@v22
+        id: filter2
+        with:
+          files: |
+              b/**
+      - run: |
+          echo ${{ steps.filter.outputs.any_changed }}
+          echo ${{ steps.filter2.outputs.any_changed }}
