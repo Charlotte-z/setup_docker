@@ -1,3 +1,8 @@
-FROM nginx
+FROM nginx:1.21.6-alpine
 
-RUN echo 'wwws'
+ARG DEV_MODE
+ENV DEV_MODE $DEV_MODE
+
+RUN echo "awddwadwa"
+
+CMD ["nginx", "-g", "daemon off;"]
