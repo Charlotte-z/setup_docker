@@ -12,9 +12,7 @@ jobs:
         id: filter
         with:
           filters: |
-            b:
-              - 'src/b.txt'
-            a:
-              - 'src/a.txt'
+            src:
+              - 'src/**'
       - run: |
           echo ${{ steps.filter.outputs.changes }}
