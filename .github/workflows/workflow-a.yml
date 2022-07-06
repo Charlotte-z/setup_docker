@@ -15,4 +15,4 @@ jobs:
             src:
               - 'src/**'
       - run: |
-          echo ${{ steps.filter.outputs.changes }}
+          echo ${{ steps.filter.outputs.any_changed }}
