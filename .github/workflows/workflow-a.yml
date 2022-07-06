@@ -12,7 +12,7 @@ jobs:
         with:
           registry: ghcr.io/geekrv
           username: ${{ github.actor }}
-          password: ${{ github.token }}
+          password: ${{ secrets.TOKEN }}
       - name: Push image
         uses: akhilerm/tag-push-action@v2.0.0
         with:
