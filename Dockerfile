@@ -1,3 +1,3 @@
-FROM scratch
+FROM node:lts-alpine AS base
 
 CMD echo "waddwaaw"
