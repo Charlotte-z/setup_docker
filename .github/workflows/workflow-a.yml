@@ -16,7 +16,7 @@ jobs:
       - name: Build image and push to GitHub Container Registry
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./
           push: true
           tags: |
             ghcr.io/geekrv/workflow:nnnn
