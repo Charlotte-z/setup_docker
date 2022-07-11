@@ -3,13 +3,25 @@ name: entrance
 on: push
 
 jobs:
-  workflow-a:
-    uses: ./.github/workflows/workflow-a.yml
-    secrets: inherit
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      file_changed: true
 
-  integration:
-    needs: [workflow-a]
-    # if: needs.workflow-a.result == 'success'
+  test2:
+    needs: test
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ toJSON(needs.workflow-a.conclusion) }}"
+      - run: |
+          if ${{ needs.test.outputs.file_changed === true }};then export FLASK_IMAGE=development-env-${{ env.TRIM_BRANCH }}; else export FLASK_IMAGE=development-env; fi
+          echo FLASK_IMAGE
+  # workflow-a:
+  #   uses: ./.github/workflows/workflow-a.yml
+  #   secrets: inherit
+
+  # integration:
+  #   needs: [workflow-a]
+  #   # if: needs.workflow-a.result == 'success'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "${{ toJSON(needs.workflow-a.conclusion) }}"
