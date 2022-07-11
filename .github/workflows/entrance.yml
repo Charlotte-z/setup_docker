@@ -1,6 +1,6 @@
 name: entrance
 
-on: pull_request
+on: push
 
 jobs:
   is_dev_dependency_changed:
