@@ -16,7 +16,7 @@ jobs:
     steps:
       - run: |
           if ${{ needs.test.outputs.file_changed == true }};then export FLASK_IMAGE=development-env-${{ env.TRIM_BRANCH }}; else export FLASK_IMAGE=development-env; fi
-          echo ${{ FLASK_IMAGE }}
+          echo $FLASK_IMAGE
   # workflow-a:
   #   uses: ./.github/workflows/workflow-a.yml
   #   secrets: inherit
