@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          echo ${{ needs.test.outputs.file_changed }}
           if ${{ needs.test.outputs.file_changed == true }};then export FLASK_IMAGE=development-env-222; else export FLASK_IMAGE=development-env; fi
           export
   # workflow-a:
