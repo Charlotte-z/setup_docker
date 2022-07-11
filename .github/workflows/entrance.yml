@@ -27,7 +27,8 @@ jobs:
     needs: test2
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ needs.test2.outputs.dev_changed }}
+      - run: |
+          if ${{ needs.test2.outputs.dev_changed }};then export FLASK_IMAGE=development-env-test; else export FLASK_IMAGE=development-env; fi
   # workflow-a:
   #   uses: ./.github/workflows/workflow-a.yml
   #   secrets: inherit
