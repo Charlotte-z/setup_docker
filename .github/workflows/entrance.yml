@@ -1,8 +1,6 @@
 name: entrance
 
-on:
-  pull_request:
-    types: [opened, ready_for_review, synchronize]
+on: pull_request
 
 jobs:
   is_dev_dependency_changed:
@@ -10,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: echo '${{ toJSON(github) }}'
-      
+
 
   # test2:
   #   needs: is_dev_dependency_changed
