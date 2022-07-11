@@ -7,28 +7,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: tj-actions/changed-files@v22
-        id: filter
-        with:
-          files: |
-              src/**
-    outputs:
-      file_changed: ${{ steps.filter.outputs.any_changed }}
+      - run: echo '${{ github.event.pull_request }}'
 
-  test2:
-    needs: is_dev_dependency_changed
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo done
-    outputs:
-      dev_changed: ${{ needs.is_dev_dependency_changed.outputs.file_changed }}
+  # test2:
+  #   needs: is_dev_dependency_changed
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo done
+  #   outputs:
+  #     dev_changed: ${{ needs.is_dev_dependency_changed.outputs.file_changed }}
 
-  test3:
-    needs: test2
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          if ${{ needs.test2.outputs.dev_changed }};then export FLASK_IMAGE=development-env-test; else export FLASK_IMAGE=development-env; fi
+  # test3:
+  #   needs: test2
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: |
+  #         if ${{ needs.test2.outputs.dev_changed }};then export FLASK_IMAGE=development-env-test; else export FLASK_IMAGE=development-env; fi
+
+
+
+
+
   # workflow-a:
   #   uses: ./.github/workflows/workflow-a.yml
   #   secrets: inherit
