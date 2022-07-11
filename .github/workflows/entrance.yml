@@ -3,29 +3,31 @@ name: entrance
 on: push
 
 jobs:
-  test:
+  is_dev_dependency_changed:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: tj-actions/changed-files@v22
+        id: filter
+        with:
+          files: |
+              src/**
     outputs:
-      file_changed: true
+      file_changed: ${{ steps.filter.outputs.any_changed }}
 
   test2:
-    needs: test
+    needs: is_dev_dependency_changed
     runs-on: ubuntu-latest
-    if: needs.test.outputs.file_changed
     steps:
-      - run: |
-          echo ${{ needs.test.outputs.file_changed }}
-          if ${{ needs.test.outputs.file_changed }};then export FLASK_IMAGE=development-env-222; else export FLASK_IMAGE=development-env; fi
-          export
+      - run: echo done
+    outputs:
+      dev_changed: needs.is_dev_dependency_changed.outputs.file_changed
 
   test3:
     needs: test2
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo  done
+      - run: echo ${{ needs.test2.outputs.dev_changed }}
   # workflow-a:
   #   uses: ./.github/workflows/workflow-a.yml
   #   secrets: inherit
