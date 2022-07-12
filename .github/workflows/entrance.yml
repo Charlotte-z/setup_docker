@@ -15,9 +15,9 @@ jobs:
           docker exec nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /root/keys/private.pem -out cert.pem -pubkey -batch
           docker exec nginx openssl rsa -in /root/keys/private.pem -pubout > /root/keys/public.pem
           docker exec nginx mkdir -p /root/keys/public
-          docker exec nginx chmod 777 /root/keys/public
+          docker exec nginx chmod -R 777 /root/keys/public
+          docker exec nginx chmod 777 /root/keys/public/public.pem
           docker exec nginx cp /root/keys/public.pem /root/keys/public/public.pem
-          docker exec nginx pip install --no-cache-dir -r /root/backend_flask/requirements-dev.txt
 
   # test2:
   #   needs: is_dev_dependency_changed
