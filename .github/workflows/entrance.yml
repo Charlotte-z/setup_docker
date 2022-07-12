@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo '${{ toJSON(github) }}'
-      
+      - run: |
+          docker image build --tag t .
+          docker run t
+          docker ps
 
   # test2:
   #   needs: is_dev_dependency_changed

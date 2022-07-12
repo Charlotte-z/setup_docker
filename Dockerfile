@@ -1,3 +1,3 @@
-FROM node:lts-alpine AS base
+FROM nginx
 
-CMD echo "waddwasssaw"
+RUN echo 'wwws'
