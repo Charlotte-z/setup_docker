@@ -13,6 +13,7 @@ jobs:
           docker run --name nginx -p 80:80 -d nginx
           docker exec -u root nginx mkdir -p ~/keys
           docker exec -u root nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
+          docker exec nginx touch ~/keys/public.pem
           docker exec -u root nginx openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
           docker exec -u root nginx mkdir -p ~/keys/public
           docker exec -u root nginx cp ~/keys/public.pem ~/keys/public/public.pem
