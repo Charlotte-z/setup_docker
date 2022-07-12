@@ -8,14 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          docker image build --tag t .
-          docker run t
-          docker ps
-          sudo docker exec t mkdir -p ~/keys
-          sudo docker exec t openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
-          sudo docker exec t openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
-          sudo docker exec t mkdir -p ~/keys/public
-          sudo docker exec t cp ~/keys/public.pem ~/keys/public/public.pem
+          docker pull nginx
+          docker run --name nginx -d n2
+          sudo docker exec nginx mkdir -p ~/keys
+          sudo docker exec nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
+          sudo docker exec nginx openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
+          sudo docker exec nginx mkdir -p ~/keys/public
+          sudo docker exec nginx cp ~/keys/public.pem ~/keys/public/public.pem
 
   # test2:
   #   needs: is_dev_dependency_changed
