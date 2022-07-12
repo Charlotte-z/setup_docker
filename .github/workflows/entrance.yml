@@ -10,7 +10,7 @@ jobs:
       - run: |
           docker pull nginx
           docker image ls
-          docker run --name nginx -d -p 8080:80 some-content-nginx
+          docker run --name latest -d -p 8080:80 nginx
           sudo docker exec nginx mkdir -p ~/keys
           sudo docker exec nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
           sudo docker exec nginx openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
