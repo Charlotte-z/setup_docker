@@ -11,11 +11,11 @@ jobs:
           docker image build --tag t .
           docker run t
           docker ps
-          docker exec t mkdir -p ~/keys
-          docker exec t openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
-          docker exec t openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
-          docker exec t mkdir -p ~/keys/public
-          docker exec t cp ~/keys/public.pem ~/keys/public/public.pem
+          sudo docker exec t mkdir -p ~/keys
+          sudo docker exec t openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
+          sudo docker exec t openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
+          sudo docker exec t mkdir -p ~/keys/public
+          sudo docker exec t cp ~/keys/public.pem ~/keys/public/public.pem
 
   # test2:
   #   needs: is_dev_dependency_changed
