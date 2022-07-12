@@ -11,11 +11,12 @@ jobs:
           docker pull nginx
           docker image ls
           docker run --name nginx -p 80:80 -d nginx
-          sudo docker exec nginx mkdir -p ~/keys
-          sudo docker exec nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
-          sudo docker exec nginx openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
-          sudo docker exec nginx mkdir -p ~/keys/public
-          sudo docker exec nginx cp ~/keys/public.pem ~/keys/public/public.pem
+          docker exec nginx mkdir -p /root/keys
+          docker exec nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /root/keys/private.pem -out cert.pem -pubkey -batch
+          docker exec nginx openssl rsa -in /root/keys/private.pem -pubout > /root/keys/public.pem
+          docker exec nginx mkdir -p /root/keys/public
+          docker exec nginx cp /root/keys/public.pem /root/keys/public/public.pem
+          docker exec nginx pip install --no-cache-dir -r /root/backend_flask/requirements-dev.txt
 
   # test2:
   #   needs: is_dev_dependency_changed
