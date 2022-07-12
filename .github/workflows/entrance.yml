@@ -11,7 +11,6 @@ jobs:
           docker pull nginx
           docker image ls
           docker run --name nginx -p 80:80 -d nginx
-          docker exec nginx apt-get install sudo
           docker exec -u root nginx mkdir -p /root/keys
           docker exec -u root nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /root/keys/private.pem -out cert.pem -pubkey -batch
           docke rexec nginx chmod 777 /root/keys/public.pem
