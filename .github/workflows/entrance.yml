@@ -1,8 +1,6 @@
 name: entrance
 
-on:
-  pull_request:
-    types: [opened, ready_for_review]
+on: push
 
 jobs:
   is_dev_dependency_changed:
