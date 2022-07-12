@@ -1,3 +1,3 @@
-FROM nginx
+FROM nginx:1.21.6-alpine
 
-RUN echo 'wwws'
+CMD ["nginx", "-g", "daemon off;"]
