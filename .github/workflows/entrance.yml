@@ -11,13 +11,13 @@ jobs:
           docker pull nginx
           docker image ls
           docker run --name nginx -p 80:80 -d nginx
-          docker exec nginx mkdir -p /root/keys
-          docker exec nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /root/keys/private.pem -out cert.pem -pubkey -batch
-          docker exec nginx openssl rsa -in /root/keys/private.pem -pubout > /root/keys/public.pem
-          docker exec nginx mkdir -p /root/keys/public
-          docker exec nginx chmod -R 777 /root/keys/public
-          docker exec nginx chmod 777 /root/keys/public/public.pem
-          docker exec nginx cp /root/keys/public.pem /root/keys/public/public.pem
+          docker exec -u root nginx mkdir -p /root/keys
+          docker exec -u root nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /root/keys/private.pem -out cert.pem -pubkey -batch
+          docker exec -u root nginx openssl rsa -in /root/keys/private.pem -pubout > /root/keys/public.pem
+          docker exec -u root nginx mkdir -p /root/keys/public
+          docker exec -u root nginx chmod -R 777 /root/keys/public
+          docker exec -u root nginx chmod 777 /root/keys/public/public.pem
+          docker exec -u root nginx cp /root/keys/public.pem /root/keys/public/public.pem
 
   # test2:
   #   needs: is_dev_dependency_changed
