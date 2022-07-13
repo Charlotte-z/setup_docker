@@ -2,48 +2,19 @@ name: entrance
 
 on: push
 
+# build jobs will only run when the PR is not in draft mode
 jobs:
-  is_dev_dependency_changed:
+  build_ingress_dev:
+    if: ${{ github.event.pull_request.draft == false }}
+    uses: ./.github/workflows/test/workflow-a.yml
+    secrets: inherit
+
+  # run integration test when all the build finished
+  integration:
+    needs: [build_ingress_dev]
+    # for now meet some trouble
+    # if: needs.build_backend_go.result == 'success' && needs.build_flask.result == 'success' && needs.build_frontend_dev.result == 'success' && needs.build_ingress_dev.result == 'success'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          docker pull nginx
-          docker image ls
-          docker run --name nginx -p 80:80 -d nginx
-          docker exec -u root nginx mkdir -p ~/keys
-          docker exec -u root nginx openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout ~/keys/private.pem -out cert.pem -pubkey -batch
-          docker exec nginx touch ~/keys/public.pem
-          docker exec -u root nginx openssl rsa -in ~/keys/private.pem -pubout > ~/keys/public.pem
-          docker exec -u root nginx mkdir -p ~/keys/public
-          docker exec -u root nginx cp ~/keys/public.pem ~/keys/public/public.pem
+      - run: echo 'done'
 
-  # test2:
-  #   needs: is_dev_dependency_changed
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo done
-  #   outputs:
-  #     dev_changed: ${{ needs.is_dev_dependency_changed.outputs.file_changed }}
-
-  # test3:
-  #   needs: test2
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: |
-  #         if ${{ needs.test2.outputs.dev_changed }};then export FLASK_IMAGE=development-env-test; else export FLASK_IMAGE=development-env; fi
-
-
-
-
-
-  # workflow-a:
-  #   uses: ./.github/workflows/workflow-a.yml
-  #   secrets: inherit
-
-  # integration:
-  #   needs: [workflow-a]
-  #   # if: needs.workflow-a.result == 'success'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "${{ toJSON(needs.workflow-a.conclusion) }}"
