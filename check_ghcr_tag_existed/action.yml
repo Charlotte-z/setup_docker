@@ -1,6 +1,6 @@
 name: "check is ghcr tag existed"
 
-secrets:
+inputs:
   user:
     description: "user name"
     required: true
