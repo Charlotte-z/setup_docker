@@ -1,0 +1,17 @@
+name: Release to prod
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-production:
+    runs-on: ubuntu-latest
+    name: Publish production
+    steps:
+      - name: Get short sha
+        uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+
+      - name: Print master sha
+        run: echo master."${{ steps.short-sha.outputs.sha }}"
