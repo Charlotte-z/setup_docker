@@ -1,0 +1,16 @@
+name: Release to prod
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-production:
+    runs-on: ubuntu-latest
+    name: Publish production
+    steps:
+      - name: run
+        uses: cedrickring/golang-action@1.6.0
+      - run: |
+          go get -u github.com/github-release/github-release
+          which github-release || exit 1
