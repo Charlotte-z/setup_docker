@@ -7,5 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish production
     steps:
-      - run: if [ -n "$run" ];then echo "changed=true" >> $GITHUB_ENV; else echo "changed=false" >> $GITHUB_ENV; fi
+      - run: |
+          run='2'
+          if [ -n "$run" ];then echo "changed=true" >> $GITHUB_ENV; else echo "changed=false" >> $GITHUB_ENV; fi
       - run: echo ${{ env.changed }}
+    outputs:
+      test: ${{ env.changed == true}}
+
+  test2:
+    runs-on: ubuntu-latest
+    needs: publish-production
+    name: s
+    steps:
+      - run: |
+          echo ${{ needs.publish-production.outputs.test }}
+          echo ${{ needs.publish-production.outputs.test == true }}
