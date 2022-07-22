@@ -20,5 +20,5 @@ jobs:
     name: s
     steps:
       - run: |
-          echo ${{ needs.publish-production.outputs.test }}
+          echo ${{ needs.publish-production.outputs.test == 'true' }}
           echo ${{ needs.publish-production.outputs.test == true }}
