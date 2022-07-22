@@ -12,7 +12,7 @@ jobs:
           if [ -n "$run" ];then echo "changed=true" >> $GITHUB_ENV; else echo "changed=false" >> $GITHUB_ENV; fi
       - run: echo ${{ env.changed }}
     outputs:
-      test: ${{ env.changed == true}}
+      test: ${{ env.changed }}
 
   test2:
     runs-on: ubuntu-latest
