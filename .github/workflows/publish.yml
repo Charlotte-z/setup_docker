@@ -17,8 +17,9 @@ jobs:
   test2:
     runs-on: ubuntu-latest
     needs: publish-production
+    if:  ${{ needs.publish-production.outputs.test  }}
     name: s
     steps:
       - run: |
-          echo ${{ needs.publish-production.outputs.test == 'true' }}
+          echo
           echo ${{ needs.publish-production.outputs.test == true }}
