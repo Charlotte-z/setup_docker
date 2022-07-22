@@ -9,9 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish production
     steps:
-      - name: Get short sha
-        uses: benjlevesque/short-sha@v1.2
-        id: short-sha
-
-      - name: Print master sha
-        run: echo master."${{ steps.short-sha.outputs.sha }}"
+      - run: if [ -n "$run" ];then echo "changed=true" >> $GITHUB_ENV; else echo "changed=false" >> $GITHUB_ENV; fi
+      - run: echo ${{ env.changed }}
