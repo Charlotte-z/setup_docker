@@ -1,8 +1,6 @@
 name: Release to prod
 
-on:
-  release:
-    types: [published]
+on: push
 
 jobs:
   publish-production:
