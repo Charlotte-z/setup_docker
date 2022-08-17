@@ -13,5 +13,4 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64
-          tags: |
-            docker pull ghcr.io/geekrv/workflow:test123
+          tags: ghcr.io/geekrv/workflow:branch
