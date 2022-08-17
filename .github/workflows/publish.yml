@@ -14,7 +14,7 @@ jobs:
         with:
           registry: ghcr.io/geekrv/workflow
           username: ${{ github.actor }}
-          password: ${{ github.token }}
+          password: ${{ secrets.TOKEN }}
       - name: Build dev flask
         uses: docker/build-push-action@v3
         with:
