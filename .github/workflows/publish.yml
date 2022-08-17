@@ -10,7 +10,7 @@ jobs:
       - name: Build dev flask
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./Dockerfile
           push: true
           platforms: linux/amd64
           tags: ghcr.io/geekrv/workflow:branch
