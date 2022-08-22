@@ -27,7 +27,7 @@ jobs:
         with:
           base_sha: ${{ steps.last_successful_commit_pull_request.outputs.commit_hash }}
           files: |
-              backend_go/**
+              backend_flask/**
     outputs:
       file_changed: ${{ steps.filter.outputs.any_changed }}
 
