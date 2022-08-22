@@ -19,7 +19,7 @@ jobs:
         id: last_successful_commit_pull_request
         with:
           branch: ${{ steps.branch-name.outputs.base_ref_branch }} # Get the last successful commit on master or main branch 
-          workflow_id: 'test.yml'
+          workflow_id: 'publish.yml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: tj-actions/changed-files@v22
