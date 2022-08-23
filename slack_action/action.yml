@@ -24,7 +24,7 @@ runs:
       - name: Get PR Info
         uses: minhchienwikipedia/get-pr-info@master
         with:
-          token: ${{ inputs.GITHUB_TOKEN }}
+          token: ${{ inputs.token }}
 
       - name: Setup message
         shell: bash
