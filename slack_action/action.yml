@@ -25,6 +25,7 @@ runs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup message
+        shell: bash
         run: |
           if [ "${{ inputs.pr_message_as_content }}" = true ] ;then echo "message=${{ inputs.pr_message_as_content }}" >> $GITHUB_ENV; else echo "message=${{ inputs.message }}" >> $GITHUB_ENV; fi
 
