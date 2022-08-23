@@ -6,6 +6,8 @@ inputs:
     description: use pr last commit as content
     required: false
     default: false
+  token:
+    required: true
   message:
     required: false
   title:
@@ -22,7 +24,7 @@ runs:
       - name: Get PR Info
         uses: minhchienwikipedia/get-pr-info@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ inputs.GITHUB_TOKEN }}
 
       - name: Setup message
         shell: bash
