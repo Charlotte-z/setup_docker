@@ -12,7 +12,7 @@ inputs:
     required: true
   repo:
     required: true
-  SLACK_WEBHOOK_URL:
+  webhook_url:
     required: true
 
 
@@ -34,6 +34,6 @@ runs:
           SLACK_COLOR: ${{ job.status }}
           SLACK_MESSAGE: ${{ env.message }}
           SLACK_TITLE: ${{ inputs.title }}
-          SLACK_WEBHOOK: ${{ inputs.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: ${{ inputs.webhook_url }}
           ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           SLACK_FOOTER: "<https://github.com/wikifactory/${{ inputs.repo }}|${{ inputs.repo }}>"
