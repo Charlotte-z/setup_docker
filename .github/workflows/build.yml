@@ -1,0 +1,16 @@
+name: Entrance
+
+on:
+  # trigger is when:
+  # PR is open
+  # PR is ready for review
+  # new commit on the PR source branch
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  echo_run_number:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Run ID
+        run: echo ${{ github.run_id }}
