@@ -13,4 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Output Run ID
-        run: echo ${{ github.run_id }}
+        run: echo ${{ github.run_number }}

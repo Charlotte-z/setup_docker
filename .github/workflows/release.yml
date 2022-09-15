@@ -1,0 +1,12 @@
+name: test
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Run ID
+        run: echo ${{ github.run_number }}
