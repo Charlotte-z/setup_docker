@@ -6,35 +6,8 @@ on:
       - closed
 
 jobs:
-  # is_files_changed:
-  #   name: Detect file change
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Get branch name
-  #       id: branch-name
-  #       uses: tj-actions/branch-names@v5
-
-  #     - uses: nrwl/last-successful-commit-action@v1
-  #       id: last_successful_commit_pull_request
-  #       with:
-  #         branch: ${{ steps.branch-name.outputs.base_ref_branch }} # Get the last successful commit on master or main branch 
-  #         workflow_id: 'publish.yml'
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-
-  #     - uses: tj-actions/changed-files@v22
-  #       id: filter
-  #       with:
-  #         base_sha: ${{ steps.last_successful_commit_pull_request.outputs.commit_hash }}
-  #         files: |
-  #             backend_flask/**
-  #   outputs:
-  #     file_changed: ${{ steps.filter.outputs.any_changed }}
-
   echo:
     runs-on: ubuntu-latest
-    needs:
-      - is_files_changed
     name: success
     steps:
       - name: Output Run ID
