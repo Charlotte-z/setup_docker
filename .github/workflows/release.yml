@@ -4,10 +4,10 @@ on:
   release:
     types: [published]
 
-    
+
 jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
       - name: Output Run ID
-        run: echo ${{ github.run_number }}
+        run: echo ${{ github.event.pull_request.number }}
