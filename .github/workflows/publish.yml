@@ -38,4 +38,6 @@ jobs:
     name: success
     steps:
       - name: Output Run ID
-        run: echo ${{ github.run_id }}
+        run: |
+          echo ${{ github.run_id }}
+          echo ${{ github.run_id - 1 }}
