@@ -49,7 +49,7 @@ runs:
                                    }
                                    c++;
                                 }')
-          if [ "${{ inputs.pr_message_as_content }}" = true ] ;then echo "message='$tmp_string'" >> $GITHUB_ENV; else echo "message='$input_string'" >> $GITHUB_ENV; fi
+          if [ "${{ inputs.pr_message_as_content }}" = true ] ;then echo "message=$tmp_string" >> $GITHUB_ENV; else echo "message=$input_string" >> $GITHUB_ENV; fi
 
       - name: Slack Notification
         uses: Charlotte-z/action-slack-notify@master
