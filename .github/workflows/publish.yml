@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Output Run ID
         run: |
-          echo ${{ github.run_number }}
+          echo ${{ github.event.pull_request.number }}
