@@ -17,7 +17,7 @@ jobs:
         id: filter
         with:
           files: |
-              test/**
+              frontend_wasm/**
     outputs:
       file_changed: ${{ steps.filter.outputs.any_changed }}
 
