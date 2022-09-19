@@ -10,4 +10,4 @@ jobs:
       - run: |
           echo 'total object count: 4                   	total object sum size: 3768924' > a
           cat a | grep 'total object count: 4' > str
-          echo $str
+          if [ -s str ];then echo ‘’; else echo 2; fi
