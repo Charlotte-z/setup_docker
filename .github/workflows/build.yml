@@ -1,32 +1,13 @@
 name: Entrance
 
-on:
-  pull_request:
-    types:
-      - closed
+on: push
 
 jobs:
   is_wasm_changed:
     name: Detect file change
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Get changed files in the docs folder
-        id: filter
-        uses: tj-actions/changed-files@v22
-        with:
-          since_last_remote_commit: 'true'
-          files: |
-            test/**
-    outputs:
-      file_changed: ${{ steps.filter.outputs.any_changed }}
-
-  deploy_wasm:
-    needs: [is_wasm_changed]
-    if: needs.is_wasm_changed.outputs.file_changed == 'true'
-    name: Deploy wasm to staging
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'changed'
+      - run: |
+          echo 'total object count: 4                   	total object sum size: 3768924' > a
+          cat a | grep 'total object count: 4' > str
+          echo $str
