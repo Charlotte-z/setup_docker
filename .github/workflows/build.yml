@@ -1,16 +1,28 @@
 name: Entrance
 
 on:
-  # trigger is when:
-  # PR is open
-  # PR is ready for review
-  # new commit on the PR source branch
   pull_request:
-    types: [opened, synchronize]
+    types:
+      - closed
 
 jobs:
-  echo_run_number:
+  is_wasm_changed:
+    name: Detect file change
     runs-on: ubuntu-latest
     steps:
-      - name: Output Run ID
-        run: echo ${{ github.event.pull_request.number }}
+      - uses: actions/checkout@v2
+      - uses: tj-actions/changed-files@v29.0.7
+        id: filter
+        with:
+          files: |
+              test/**
+    outputs:
+      file_changed: ${{ steps.filter.outputs.any_changed }}
+
+  deploy_wasm:
+    needs: [is_wasm_changed]
+    if: needs.is_wasm_changed.outputs.file_changed == 'true'
+    name: Deploy wasm to staging
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'changed'
