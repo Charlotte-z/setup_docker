@@ -9,5 +9,5 @@ jobs:
     steps:
       - run: |
           echo 'total object count: 4                   	total object sum size: 3768924' > a
-          cat a | grep 'total object count: 0' > str || true
+          cat a | grep 'total object count: 4' > str || true
           if [ -s str ];then echo 1; else echo 2; fi
