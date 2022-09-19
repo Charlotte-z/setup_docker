@@ -17,6 +17,7 @@ jobs:
         id: filter
         uses: tj-actions/changed-files@v22
         with:
+          since_last_remote_commit: 'true'
           files: |
             test/**
     outputs:
