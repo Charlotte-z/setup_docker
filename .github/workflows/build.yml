@@ -23,9 +23,6 @@ jobs:
     outputs:
       file_changed: ${{ steps.filter.outputs.any_changed }}
 
-
-
-
   deploy_wasm:
     needs: [is_wasm_changed]
     if: needs.is_wasm_changed.outputs.file_changed == 'true'
