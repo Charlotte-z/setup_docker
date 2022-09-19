@@ -15,10 +15,10 @@ jobs:
           fetch-depth: 0
       - name: Get changed files in the docs folder
         id: filter
-        uses: tj-actions/changed-files@v29.0.7
+        uses: tj-actions/changed-files@v22
         with:
           files: |
-            docs/**
+            test/**
     outputs:
       file_changed: ${{ steps.filter.outputs.any_changed }}
 
