@@ -3,6 +3,7 @@ name: Entrance
 on: push
 
 jobs:
+
   is_wasm_changed:
     name: Detect file change
     runs-on: ubuntu-latest
