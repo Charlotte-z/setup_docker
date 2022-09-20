@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: Charlotte-z/workflows/test@main
         id: t
-      - run: echo "${{ steps.t.outputs.ots }}"
+      - run: echo "${{ steps.test.outputs.test }}"

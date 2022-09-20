@@ -1,15 +1,15 @@
 name: "test"
 description: 'get the last one commit sha before merge pr'
 
+outputs:
+  test:
+    description: "Random number"
+    value: ${{ steps.test.outputs.test }}
+
 runs:
   using: "composite"
   steps:
-    - name: install jq
+    - name: test
       shell: bash
-      run: |
-        sudo apt-get install jq
-    - name: pr_commit_sha
-      shell: bash
-      run: echo "coding=test" >> $GITHUB_ENV
-  outputs:
-    ots: ${{ env.coding }}
+      id: test
+      run: echo "::set-output name=test::$(echo 2233)"
