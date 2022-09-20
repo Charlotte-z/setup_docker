@@ -9,7 +9,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: test
-      shell: bash
+    - shell: bash
       id: test
-      run: echo "::set-output name=test::$(echo 2233)"
+      run: echo "::set-output name=test::$(echo $RANDOM)"
