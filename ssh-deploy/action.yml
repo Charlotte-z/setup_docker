@@ -17,6 +17,7 @@ runs:
         username: ubuntu
         password: 87cca89@87CCA89
         script: |
+          sudo -i
           cd /tmp
           echo "${{ inputs.services_name }}" >> services
           services_name=$(awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' services)
