@@ -17,6 +17,6 @@ runs:
         username: ubuntu
         password: 87cca89@87CCA89
         script: |
-          echo ${{ inputs.services_name }} >> /tmp/services
+          echo "${{ inputs.services_name }}" >> /tmp/services
           cat /tmp/services
         command_timeout: 30m
