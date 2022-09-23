@@ -18,6 +18,6 @@ runs:
         password: 87cca89@87CCA89
         script: |
           echo "${{ inputs.services_name }}" >> /tmp/services
-          awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' services > /tmp/services
+          awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' /tmp/services > /tmp/services
           cat /tmp/services
         command_timeout: 30m
