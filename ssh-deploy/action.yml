@@ -17,7 +17,8 @@ runs:
         username: ubuntu
         password: 87cca89@87CCA89
         script: |
-          echo "${{ inputs.services_name }}" >> /tmp/services
-          awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' /tmp/services > /tmp/services
-          cat /tmp/services
+          cd /tmp
+          echo "${{ inputs.services_name }}" >> services
+          echo "$(awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' services)" > services
+          cat services
         command_timeout: 30m
