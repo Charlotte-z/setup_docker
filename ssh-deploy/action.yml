@@ -1,0 +1,32 @@
+name: "ssh deploy"
+description: 'auto deploy the container'
+
+inputs:
+  services_name:
+    required: true
+    type: string
+    is-array: true
+  # DEPLOYER_HOST:
+  #   description: "url host"
+  #   required: true
+  # DEPLOYER_USERNAME:
+  #   description: "username"
+  #   required: true
+  # CI_SSH_KEY:
+  #   description: "ssh key"
+  #   required: true
+  # CI_SSH_PASSPHRASE:
+  #   required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run production deploy script
+      uses: appleboy/ssh-action@master
+      with:
+        host: 42.193.16.100
+        username: ubuntu
+        password: 87cca89@87CCA89
+        script: |
+          cat ${{ inputs.services_name }}
+        command_timeout: 30m

@@ -8,6 +8,9 @@ jobs:
     name: Detect file change
     runs-on: ubuntu-latest
     steps:
-      - uses: Charlotte-z/workflows/test@main
-        id: t
-      - run: echo "${{ steps.t.outputs.test }}"
+      - uses: Charlotte-z/workflows/ssh-deploy@main
+        with:
+          services_name:
+            - postgres
+            - redis
+            - nodejs
