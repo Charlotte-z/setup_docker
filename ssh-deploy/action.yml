@@ -23,4 +23,5 @@ runs:
           services_name=$(awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' services)
 
           docker-compose pull $services_name
+          docker-compose up -d
         command_timeout: 30m
