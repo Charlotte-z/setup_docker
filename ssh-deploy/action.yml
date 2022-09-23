@@ -19,7 +19,7 @@ runs:
         password: 87cca89@87CCA89
         script: |
           cd /tmp
-          echo "${{ inputs.services_name }}" >> services
+          echo "${{ inputs.services_name }}" > services
           services_name=$(awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' services)
           docker compose pull $services_name
         command_timeout: 30m
