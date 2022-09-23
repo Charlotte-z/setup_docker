@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: Charlotte-z/workflows/ssh-deploy@main
         with:
-          services_name:
-            - name=postgres
-            - name=redis
+          services_name: |
+            postgres
+            redis
