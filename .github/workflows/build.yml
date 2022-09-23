@@ -12,4 +12,5 @@ jobs:
         with:
           services_name: |
             postgres
-            redis
+            nginx
+            node
