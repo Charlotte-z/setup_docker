@@ -6,17 +6,6 @@ inputs:
     required: true
     type: string
     is-array: true
-  # DEPLOYER_HOST:
-  #   description: "url host"
-  #   required: true
-  # DEPLOYER_USERNAME:
-  #   description: "username"
-  #   required: true
-  # CI_SSH_KEY:
-  #   description: "ssh key"
-  #   required: true
-  # CI_SSH_PASSPHRASE:
-  #   required: true
 
 runs:
   using: "composite"

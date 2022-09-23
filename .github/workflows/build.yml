@@ -11,6 +11,5 @@ jobs:
       - uses: Charlotte-z/workflows/ssh-deploy@main
         with:
           services_name:
-            - postgres
-            - redis
-            - nodejs
+            - name=postgres
+            - name=redis
