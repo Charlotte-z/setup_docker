@@ -2,16 +2,23 @@ name: Entrance
 
 on: push
 
+env:
+  SERVICES_NAME: "nginx postgres node"
+
 jobs:
 
   is_wasm_changed:
     name: Detect file change
     runs-on: ubuntu-latest
     steps:
-      - uses: Charlotte-z/workflows/ssh-deploy@main
+      - name: Run production deploy script
+        uses: appleboy/ssh-action@master
         with:
-          services_name: |
-            postgres
-            nginx
-            node
-          test: ${{ secrets.TOKEN }}
+          host: 42.193.16.100
+          port: 22
+          username: root
+          password: 87cca89@87CCA89
+          script: |
+            cd /tmp
+            docker-compose pull ${{ env.SERVICES_NAME }}
+          command_timeout: 30m
