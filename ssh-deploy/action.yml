@@ -12,7 +12,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "${{ inputs.test }}, ${{ inputs.services_name }}"
+    - shell: bash
+      run: echo "${{ inputs.test }}, ${{ inputs.services_name }}"
     - name: Run production deploy script
       uses: appleboy/ssh-action@master
       with:
