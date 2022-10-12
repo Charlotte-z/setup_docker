@@ -11,11 +11,12 @@ jobs:
         uses: octokit/request-action@v2.x
         id: create_check_run
         with:
-          route: POST /repos/${{ github.actor }}/workflows/check-runs
+          route: POST /repos/{owner}/{repo}/check-runs
           owner: ${{ github.actor }}
           repo: workflows
           name: Test check run
           head_sha: ${{ github.sha }}
+          # check_run_id: ${{ fromJson(steps.create_check_run.outputs.data).id }}
           output: |
             title: Test check run title
             summary: A summary of the test check run
