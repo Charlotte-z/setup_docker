@@ -7,6 +7,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+   
+      - name: Get short sha
+        uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+
       - name: Create check run for ${{ github.sha }}
         uses: octokit/request-action@v2.x
         id: create_check_run
@@ -15,7 +20,7 @@ jobs:
           owner: Charlotte-z
           repo: workflows
           name: Test check run
-          head_sha: ${{ github.sha }}
+          head_sha: ${{ steps.short-sha.outputs.sha }}
           output: |
             title: Test check run title
             summary: A summary of the test check run
