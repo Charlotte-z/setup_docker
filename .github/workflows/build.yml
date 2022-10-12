@@ -14,6 +14,7 @@ jobs:
       - name: Read README.md
         id: read_readme
         run: |
+          ls -a
           README=$(cat README.md)
           README="${README//'%'/'%25'}"
           README="${README//$'\n'/'%0A'}"
