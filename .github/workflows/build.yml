@@ -19,6 +19,9 @@ jobs:
         id: read_readme
         run: |
           README=$(cat README.md)
+          README="${README//$'\n'/'\n'}"
+          README="${README//$'\r'/''}"
+          README="${README//$'\"'/'\"'}"
           echo ::set-output name=readme::"$README"
           echo $README
 
@@ -33,10 +36,8 @@ jobs:
           head_sha: ${{github.event.pull_request.head.sha}}
           output: |
             title: Test check run title
-            summary: |
-              ${{ steps.read_readme.outputs.readme }}
-            text: |
-              ${{ steps.read_readme.outputs.readme }}
+            summary: A summary of the test check run
+            text: 'awdawdwadwad'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: octokit/request-action@v2.x
