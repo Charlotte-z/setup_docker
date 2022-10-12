@@ -7,15 +7,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: octokit/request-action@v2.x
+      - name: Create check run for ${{ github.sha }}
+        uses: ./
         id: create_check_run
         with:
-          route: POST /repos/Charlotte-z/workflows/check-runs
-          owner: octokit
+          route: POST /repos/${{ github.actor }}/workflows/check-runs
+          owner: ${{ github.actor }}
           repo: workflows
-          name: "Test check run"
+          name: Test check run
           head_sha: ${{ github.sha }}
-          output: | # The | is significant!
+          output: |
             title: Test check run title
             summary: A summary of the test check run
             images:
