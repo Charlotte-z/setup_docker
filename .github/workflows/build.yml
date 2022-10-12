@@ -33,7 +33,7 @@ jobs:
           route: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
           owner: Charlotte-z
           repo: workflows
-          check_run_id: ${{ fromJson(steps.create_check_run.outputs.data).id }}
+          check_run_id: 44
           conclusion: success
           status: completed
         env:
