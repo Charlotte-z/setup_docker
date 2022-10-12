@@ -19,9 +19,6 @@ jobs:
         id: read_readme
         run: |
           README=$(cat README.md)
-          README="${README//$'\n'/'\n'}"
-          README="${README//$'\r'/''}"
-          README="${README//$'\"'/'\"'}"
           echo ::set-output name=readme::"$README"
           echo $README
 
