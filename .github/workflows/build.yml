@@ -9,7 +9,7 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: create_check_run
         with:
-          route: POST /repos/wikifactory/marketplace-admin/check-runs
+          route: POST /repos/Charlotte-z/workflows/check-runs
           owner: octokit
           repo: request-action
           name: "Test check run"
