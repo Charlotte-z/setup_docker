@@ -33,8 +33,8 @@ jobs:
         id: update_check_run
         with:
           route: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
-          owner: octokit
-          repo: request-action
+          owner: Charlotte-z
+          repo: workflows
           check_run_id: ${{ fromJson(steps.create_check_run.outputs.data).id }}
           conclusion: "success"
           status: "completed"
