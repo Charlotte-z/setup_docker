@@ -34,6 +34,7 @@ jobs:
           conclusion: ${{ job.status }}
           output: |
             {"summary":"123", "output_text_description_file": "./README.md"}
+          output_text_description_file: README.md
 
       # - name: Create check run for ${{ github.sha }}
       #   uses: octokit/request-action@v2.1.0
