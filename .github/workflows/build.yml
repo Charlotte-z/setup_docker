@@ -22,17 +22,3 @@ jobs:
                 image_url: https://octodex.github.com/images/jetpacktocat.png
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: >-
-          Update check run ${{ fromJson(steps.create_check_run.outputs.data).id
-          }}
-        uses: octokit/request-action@v2.x
-        id: update_check_run
-        with:
-          route: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
-          owner: Charlotte-z
-          repo: workflows
-          check_run_id: 44
-          conclusion: success
-          status: completed
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
