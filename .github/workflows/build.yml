@@ -18,12 +18,11 @@ jobs:
       - name: Read README.md
         id: read_readme
         run: |
-          ls -a
           README=$(cat README.md)
-          README="${README//'%'/'%25'}"
-          README="${README//$'\n'/'%0A'}"
-          README="${README//$'\r'/'%0D'}"
-          echo ::set-output name=readme::$README
+          README="${README//$'\n'/'\n'}"
+          README="${README//$'\r'/''}"
+          README="${README//$'\"'/'\"'}"
+          echo ::set-output name=readme::"$README"
           echo $README
 
       - name: Create check run for ${{ github.sha }}
