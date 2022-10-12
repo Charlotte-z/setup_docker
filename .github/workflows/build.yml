@@ -33,7 +33,7 @@ jobs:
           repo: Charlotte-z/workflows
           conclusion: ${{ job.status }}
           output: |
-            {"summary":"123", "text": "awddwa"}
+            {"summary":"123", "text_description": "awddwa"}
 
       # - name: Create check run for ${{ github.sha }}
       #   uses: octokit/request-action@v2.1.0
