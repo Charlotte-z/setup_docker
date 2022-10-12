@@ -26,7 +26,7 @@ jobs:
           echo $README
 
       - name: Create check run for ${{ github.sha }}
-        uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v2.1.0
         id: create_check_run
         with:
           route: POST /repos/{owner}/{repo}/check-runs
@@ -37,10 +37,11 @@ jobs:
           output: |
             title: Test check run title
             summary: A summary of the test check run
-            text: 'awdawdwadwad'
+            text: |
+              ${{ steps.read_readme.outputs.readme }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: octokit/request-action@v2.x
+      - uses: octokit/request-action@v2.1.0
         id: update_check_run
         with:
           route: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
