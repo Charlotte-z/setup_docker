@@ -37,8 +37,7 @@ jobs:
           output: |
             title: Test check run title
             summary: A summary of the test check run
-          text: |
-            "${{ steps.read_readme.outputs.readme }}"
+            text: ${{ steps.read_readme.outputs.readme }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: octokit/request-action@v2.x
