@@ -12,7 +12,7 @@ jobs:
         with:
           route: POST /repos/Charlotte-z/workflows/check-runs
           owner: octokit
-          repo: request-action
+          repo: workflows
           name: "Test check run"
           head_sha: ${{ github.sha }}
           output: | # The | is significant!
