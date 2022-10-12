@@ -25,30 +25,40 @@ jobs:
           echo ::set-output name=readme::"$README"
           echo $README
 
-      - name: Create check run for ${{ github.sha }}
-        uses: octokit/request-action@v2.1.0
-        id: create_check_run
+      - uses: LouisBrunner/checks-action@v1.1.1
+        if: always()
         with:
-          route: POST /repos/{owner}/{repo}/check-runs
-          owner: Charlotte-z
-          repo: workflows
-          name: Test check run
-          head_sha: ${{github.event.pull_request.head.sha}}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: test
+          repo: Charlotte-z/workflows
+          conclusion: ${{ job.status }}
           output: |
-            title: Test check run title
-            summary: A summary of the test check run
-            text: |
-              ${{ steps.read_readme.outputs.readme }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: octokit/request-action@v2.1.0
-        id: update_check_run
-        with:
-          route: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
-          owner: Charlotte-z
-          repo: workflows
-          check_run_id: ${{ fromJson(steps.create_check_run.outputs.data).id }}
-          conclusion: "success"
-          status: "completed"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            {"summary":${{ steps.test.outputs.summary }}, "text": "awddwa"}
+
+      # - name: Create check run for ${{ github.sha }}
+      #   uses: octokit/request-action@v2.1.0
+      #   id: create_check_run
+      #   with:
+      #     route: POST /repos/{owner}/{repo}/check-runs
+      #     owner: Charlotte-z
+      #     repo: workflows
+      #     name: Test check run
+      #     head_sha: ${{github.event.pull_request.head.sha}}
+      #     output: |
+      #       title: Test check run title
+      #       summary: A summary of the test check run
+      #       text: |
+      #         ${{ steps.read_readme.outputs.readme }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: octokit/request-action@v2.1.0
+      #   id: update_check_run
+      #   with:
+      #     route: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
+      #     owner: Charlotte-z
+      #     repo: workflows
+      #     check_run_id: ${{ fromJson(steps.create_check_run.outputs.data).id }}
+      #     conclusion: "success"
+      #     status: "completed"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
