@@ -20,7 +20,7 @@ jobs:
           owner: Charlotte-z
           repo: workflows
           name: Test check run
-          head_sha: ${{ steps.short-sha.outputs.sha }}
+          head_sha: ${{github.event.pull_request.head.sha}}
           output: |
             title: Test check run title
             summary: A summary of the test check run
