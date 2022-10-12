@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create check run for ${{ github.sha }}
-        uses: ./
+        uses: octokit/request-action@v2.x
         id: create_check_run
         with:
           route: POST /repos/${{ github.actor }}/workflows/check-runs
