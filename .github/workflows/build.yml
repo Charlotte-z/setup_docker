@@ -25,7 +25,7 @@ jobs:
           echo ::set-output name=readme::"$README"
           echo $README
 
-      - uses: LouisBrunner/checks-action@v1.1.1
+      - uses: LouisBrunner/checks-action@v1.3.1
         if: always()
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
