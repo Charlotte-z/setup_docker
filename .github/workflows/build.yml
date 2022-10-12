@@ -10,6 +10,10 @@ jobs:
       - name: Get short sha
         uses: benjlevesque/short-sha@v1.2
         id: short-sha
+      
+
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Read README.md
         id: read_readme
