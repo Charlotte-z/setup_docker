@@ -11,6 +11,16 @@ jobs:
         uses: benjlevesque/short-sha@v1.2
         id: short-sha
 
+      - name: Read README.md
+        id: read_readme
+        run: |
+          README=$(cat README.md)
+          README="${README//'%'/'%25'}"
+          README="${README//$'\n'/'%0A'}"
+          README="${README//$'\r'/'%0D'}"
+          echo ::set-output name=readme::$README
+          echo $README
+
       - name: Create check run for ${{ github.sha }}
         uses: octokit/request-action@v2.x
         id: create_check_run
@@ -23,7 +33,7 @@ jobs:
           output: |
             title: Test check run title
             summary: A summary of the test check run
-            text: '123123213213123'
+            text: ${{ steps.read_readme.outputs.readme }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: octokit/request-action@v2.x
