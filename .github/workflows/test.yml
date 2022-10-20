@@ -14,5 +14,11 @@ jobs:
         with:
           path: .
         id: d
-
-      - run: echo ${{ JSON(steps.d.outputs) }}
+    outputs:
+      version_matrix: ${{ steps.d.outputs.dir_matrix }}
+  
+  two:
+    runs-on: ubuntu-latest
+    needs: [one]
+    steps:
+      - run: echo ${{ needs.one.outputs.version_matrix }}
