@@ -1,5 +1,5 @@
 name: "count file of directory"
-description: 'get the file counts of directory and generated the matrix automatically'
+description: "get the file counts of directory and generated the matrix automatically"
 
 inputs:
   path:
@@ -12,13 +12,11 @@ runs:
     - name: Count files number
       shell: bash
       run: |
-        pwd
         cd ${{ inputs.path }}
         count=$(ls -l | grep "^-" | wc -l)
-        ls
-        ls -l | grep "^-" | wc -l
+
         str="["
-        for ((i=1; i<=8; i++))
+        for ((i=1; i<=$count; i++))
         do
           if [[ $i -eq 1 ]] ;
             then
@@ -29,4 +27,4 @@ runs:
         done
         str=$str"]"
         echo $str
-        echo "::set-output name=dir_matrix::$str"
+        run: echo "dir_matrix=$str" >> $GITHUB_OUTPUT
