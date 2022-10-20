@@ -25,9 +25,9 @@ runs:
         do
           if [[ $i -eq 1 ]] ;
             then
-              str=$str$i;
+              str=$str'"'$i'"';
             else
-              str=$str', '$i;
+              str=$str', "'$i'"';
           fi
         done
         str=$str"]"
