@@ -12,9 +12,11 @@ runs:
     - name: Count files number
       shell: bash
       run: |
+        pwd
         cd ${{ inputs.path }}
         count=$(ls -l | grep "^-" | wc -l)
-
+        ls
+        ls -l | grep "^-" | wc -l
         str='['
         for ((i=1; i<=8; i++))
         do
