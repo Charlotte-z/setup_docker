@@ -17,7 +17,7 @@ runs:
         count=$(ls -l | grep "^-" | wc -l)
         ls
         ls -l | grep "^-" | wc -l
-        let str='['
+        str="[""
         for ((i=1; i<=8; i++))
         do
           if [[ $i -eq 1 ]] ;
@@ -27,6 +27,6 @@ runs:
               str=$str', '$i;
           fi
         done
-        str=$str']'
+        str=$str"]"
 
         echo '::set-output name=dir_matrix::$str'
