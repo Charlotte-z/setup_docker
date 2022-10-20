@@ -28,5 +28,5 @@ runs:
           fi
         done
         str=$str"]"
-
+        echo $str
         echo '::set-output name=dir_matrix::$str'
