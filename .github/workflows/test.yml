@@ -14,4 +14,5 @@ jobs:
         with:
           path: .
         id: test
+
       - run: echo ${{ steps.test.outputs.dir_matrix }}
