@@ -11,11 +11,12 @@ jobs:
         uses: actions/checkout@v3
 
       - uses: Charlotte-z/workflows/dir_count@main
+        id: d
         with:
           path: .
-        id: d
+      - run: echo ${{ steps.d.outputs.MX }}
     outputs:
-      version_matrix: ${{ steps.d.outputs.dir_matrix }}
+      version_matrix: ${{ steps.d.outputs.MX }}
   
   two:
     runs-on: ubuntu-latest
