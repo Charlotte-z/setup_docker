@@ -15,7 +15,7 @@ jobs:
           path: .
       - run: echo ${{ steps.test.outputs.MX }}
     outputs:
-      version_matrix: ${{ steps.d.outputs.MX }}
+      version_matrix: ${{ steps.d.outputs.val }}
   
   two:
     runs-on: ubuntu-latest

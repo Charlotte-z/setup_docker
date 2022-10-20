@@ -6,6 +6,10 @@ inputs:
     description: "The directory which is the files you want to count"
     required: true
 
+outputs:
+  val:
+    value: ${{ steps.test.outputs.MX }}
+
 runs: 
   using: "composite"
   steps:
