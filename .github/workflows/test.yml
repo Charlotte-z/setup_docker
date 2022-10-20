@@ -13,6 +13,6 @@ jobs:
       - uses: Charlotte-z/workflows/dir_count@main
         with:
           path: .
-        id: test
+        id: d
 
-      - run: echo ${{ steps.test.outputs.dir_matrix }}
+      - run: echo ${{ steps.d.outputs }}
