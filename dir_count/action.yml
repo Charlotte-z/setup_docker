@@ -1,0 +1,34 @@
+name: "count file of directory"
+description: 'get the file counts of directory and generated the matrix automatically'
+
+inputs:
+  path:
+    description: "The directory which is the files you want to count"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Count files number
+      shell: bash
+      run: |
+        cd ${{ inputs.path }}
+        count=$(ls -l | grep "^-" | wc -l)
+        for((i=1;i<=10;i++));
+        do
+          echo $(expr $i \* 3 + 1);
+        done
+
+        str='['
+        for ((i=1; i<=$n; i++))
+        do
+          if [[ $i -eq 1 ]] ;
+            then
+              str=$str$i;
+            else
+              str=$str', '$i;
+          fi
+        done
+        str=$str']'
+
+        echo '::set-output name=dir_matrix::${{ str }}'
