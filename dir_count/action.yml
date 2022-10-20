@@ -29,4 +29,4 @@ runs:
         done
         str=$str']'
 
-        echo '::set-output name=dir_matrix::${{ str }}'
+        echo '::set-output name=dir_matrix::$str'
