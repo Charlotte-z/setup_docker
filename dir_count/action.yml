@@ -17,7 +17,7 @@ runs:
         count=$(ls -l | grep "^-" | wc -l)
         ls
         ls -l | grep "^-" | wc -l
-        str='['
+        let str='['
         for ((i=1; i<=8; i++))
         do
           if [[ $i -eq 1 ]] ;
