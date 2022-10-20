@@ -4,25 +4,40 @@ on:
   push:
 
 jobs:
-  one:
+  build-matrix:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout alpha code
-        uses: actions/checkout@v3
-
-      - uses: Charlotte-z/workflows/dir_count@main
-        id: test2
-        with:
-          path: .
-      - run: echo ${{ steps.test2.outputs.count_for_matrix }}
+      - id: set-matrix
+        run: echo '::set-output name=version_matrix::["12","14","16"]'
     outputs:
-      version_matrix: ${{ steps.d.outputs.val }}
-
-  two:
+      version_matrix: ${{ steps.set-matrix.outputs.version_matrix }}
+  ci:
+    needs: build-matrix
     runs-on: ubuntu-latest
-    needs: [one]
     strategy:
       matrix:
-        version: ${{ fromJson(needs.one.outputs.version_matrix) }}
+        version: ${{ fromJson(needs.build-matrix.outputs.version_matrix) }}
     steps:
       - run: echo ${{ matrix.version }}
+  # one:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout alpha code
+  #       uses: actions/checkout@v3
+
+  #     - uses: Charlotte-z/workflows/dir_count@main
+  #       id: test2
+  #       with:
+  #         path: .
+  #     - run: echo ${{ steps.test2.outputs.count_for_matrix }}
+  #   outputs:
+  #     version_matrix: ${{ steps.d.outputs.val }}
+
+  # two:
+  #   runs-on: ubuntu-latest
+  #   needs: [one]
+  #   strategy:
+  #     matrix:
+  #       version: ${{ fromJson(needs.one.outputs.version_matrix) }}
+  #   steps:
+  #     - run: echo ${{ matrix.version }}
