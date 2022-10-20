@@ -7,8 +7,8 @@ inputs:
     required: true
 
 outputs:
-  val:
-    value: ${{ steps.test.outputs.MX }}
+  count_for_matrix:
+    value: ${{ steps.test.outputs.str }}
 
 runs: 
   using: "composite"
@@ -31,5 +31,5 @@ runs:
           fi
         done
         str=$str"]"
-        echo $str
-        echo "MX=123321" >> $GITHUB_OUTPUT
+
+        echo "str=$str" >> $GITHUB_OUTPUT

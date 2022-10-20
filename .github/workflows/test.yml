@@ -14,10 +14,10 @@ jobs:
         id: test2
         with:
           path: .
-      - run: echo ${{ steps.test2.outputs.val }}
+      - run: echo ${{ steps.test2.outputs.count_for_matrix }}
     outputs:
       version_matrix: ${{ steps.d.outputs.val }}
-  
+
   two:
     runs-on: ubuntu-latest
     needs: [one]
