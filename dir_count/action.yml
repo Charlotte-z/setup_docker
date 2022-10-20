@@ -6,7 +6,7 @@ inputs:
     description: "The directory which is the files you want to count"
     required: true
 
-runs:
+runs: 
   using: "composite"
   steps:
     - name: Count files number
