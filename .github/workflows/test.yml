@@ -15,4 +15,4 @@ jobs:
           path: .
         id: d
 
-      - run: echo ${{ steps.d.outputs }}
+      - run: echo ${{ json(steps.d.outputs) }}
