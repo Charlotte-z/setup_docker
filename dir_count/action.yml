@@ -27,4 +27,4 @@ runs:
         done
         str=$str"]"
         echo $str
-        echo "dir_matrix=$str" >> $GITHUB_OUTPUT
+        echo "dir_matrix=123321" >> $GITHUB_OUTPUT
