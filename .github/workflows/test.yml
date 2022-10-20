@@ -19,8 +19,8 @@ jobs:
         version: ${{ fromJson(needs.build-matrix.outputs.version_matrix) }}
     steps:
       - run: |
-        echo ${{ needs.build-matrix.outputs.version_matrix }}
-        echo ${{ fromJson(needs.build-matrix.outputs.version_matrix) }}
+          echo ${{ needs.build-matrix.outputs.version_matrix }}
+          echo ${{ fromJson(needs.build-matrix.outputs.version_matrix) }}
       - run: echo ${{ matrix.version }}
   # one:
   #   runs-on: ubuntu-latest

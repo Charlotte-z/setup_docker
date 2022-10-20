@@ -27,7 +27,7 @@ runs:
             then
               str=$str'"'$i'"';
             else
-              str=$str', "'$i'"';
+              str=$str',"'$i'"';
           fi
         done
         str=$str"]"
