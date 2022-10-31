@@ -9,4 +9,20 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ toJSON(github) }}"
+      - run: |
+          touch tmp.txt
+
+          if [ "${{ github.env_name }}" == "workflow_dispatch" ]
+          then 
+            cat <<EOT > tmp.txt
+            ${{ github.commit.message }}
+            EOT
+            tmp_string=$(cat tmp.txt | tr '\n' "  ")
+          else
+            cat <<EOT > tmp.txt
+            123321
+            EOT
+            tmp_string=$(cat tmp.txt | tr '\n' "  ")
+          fi
+
+          echo "$tmp_string"
