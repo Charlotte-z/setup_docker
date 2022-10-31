@@ -5,7 +5,6 @@ on:
     types: [opened, synchronize]
   workflow_dispatch:
 
-
 jobs:
   one:
     runs-on: ubuntu-latest
