@@ -5,9 +5,9 @@ on:
     types: [opened, synchronize]
   workflow_dispatch:
 
+
 jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout alpha code
-        uses: actions/checkout@v3
+      - run: echo "${{ toJSON(github) }}"
