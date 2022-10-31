@@ -1,0 +1,47 @@
+name: Frontend e2e test
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout alpha code
+        uses: actions/checkout@v3
+
+      - name: Setup Browser
+        uses: abhi1693/setup-browser@v0.3.4
+        with:
+          browser: firefox
+          version: latest
+
+
+  two:
+    runs-on: ubuntu-latest
+    needs: [one]
+    strategy:
+      matrix:
+        version: ${{ fromJson(needs.one.outputs.version_matrix) }}
+    steps:
+      - run: echo ${{ matrix.version }}
+  # build-matrix:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - id: set-matrix
+  #       run: echo '::set-output name=version_matrix::["12","14","16"]'
+  #   outputs:
+  #     version_matrix: ${{ steps.set-matrix.outputs.version_matrix }}
+  # ci:
+  #   needs: build-matrix
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       version: ${{ fromJson(needs.build-matrix.outputs.version_matrix) }}
+  #   steps:
+  #     - run: |
+  #         echo ${{ needs.build-matrix.outputs.version_matrix }}
+  #         echo ${{ fromJson(needs.build-matrix.outputs.version_matrix) }}
+  #     - run: echo ${{ matrix.version }}
