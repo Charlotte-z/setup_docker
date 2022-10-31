@@ -20,6 +20,6 @@ runs:
       shell: bash
       run: |
         sudo apt-get install jq
-        TOKEN=$(curl -u ${{ inputs.user }}:${{ inputs.token }} https://ghcr.io/token\?scope\="repository:wikifactory/subscription-server:pull" | jq -r .token)
+        TOKEN=$(curl -u ${{ inputs.user }}:${{ inputs.token }} https://ghcr.io/token\?scope\="repository:${{ inputs.org }}/${{ inputs.repo }}:pull" | jq -r .token)
         HTTP_CODE=$(curl --head -H "Authorization: Bearer $TOKEN" https://ghcr.io/v2/${{ inputs.org }}/${{ inputs.repo }}/manifests/${{ inputs.tag }} -o /dev/null -w '%{http_code}\n' -s)
         if [ $HTTP_CODE -eq 200 ];then echo "EXISTED=true" > $GITHUB_ENV; else echo "EXISTED=false" > $GITHUB_ENV; fi
