@@ -1,7 +1,9 @@
 name: Frontend e2e test
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
 
 jobs:
   one:
