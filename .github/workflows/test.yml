@@ -15,4 +15,4 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ toJSON(github) }}"
+      - run: echo "${{ github.event.inputs.text }}"
