@@ -4,15 +4,10 @@ on:
   pull_request:
     types: [opened, synchronize]
   workflow_dispatch:
-    inputs:
-      text:
-        type: string
-        required: true
-        description: 'test'
 
 
 jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.inputs.text }}"
+      - run: echo "${{ github.event }}"
