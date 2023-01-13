@@ -14,4 +14,4 @@ jobs:
         shell: bash
         run: echo "branch_name=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
         id: extract_branch
-      - run: echo "${{ steps.extract_branch.outputs.branch_name }}"
+      - run: echo "${{ toJSON(github) }}"
