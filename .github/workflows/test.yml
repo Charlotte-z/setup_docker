@@ -10,7 +10,7 @@ jobs:
       - name: Backup old services and deploy new services
         uses: appleboy/ssh-action@master
         with:
-          host: 42.193.16.100
+          host: 43.136.131.46
           username: ubuntu
           password: 87cca89@87CCA89
           envs: DGRAPH_ADDR
