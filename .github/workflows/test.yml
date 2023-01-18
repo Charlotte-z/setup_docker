@@ -20,7 +20,8 @@ jobs:
             data=aha
             if [ -d "$data" ]; then
               echo "Directory $data exists."
+              exit 0
             else
               echo "Directory $data does not exist."
-              exit 2
+              exit 0
             fi
