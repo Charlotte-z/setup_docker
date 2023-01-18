@@ -22,4 +22,5 @@ jobs:
               echo "Directory $data exists."
             else
               echo "Directory $data does not exist."
+              exit 2
             fi
