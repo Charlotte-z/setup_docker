@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Backup old services and deploy new services
         uses: appleboy/ssh-action@master
+        env:
+          DGRAPH_ADDR: awd
         with:
           host: 43.136.131.46
           username: ubuntu
@@ -17,14 +19,13 @@ jobs:
           script_stop: true
           script: |
             cd /tmp
-            data=aha
-            if [ "$data" = "aha" ]; then
+            if [ "$DGRAPH_ADDR" = "awd" ]; then
               echo "1"
               echo "2"
               echo "3"
             fi
 
-            if [ "$data" = "aha" ]; then
+            if [ "$data" = "xxx" ]; then
               echo "4"
               echo "5"
               echo "6"
