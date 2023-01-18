@@ -12,7 +12,7 @@ jobs:
         with:
           host: 42.193.16.100
           username: root
-          password: 87cca89
+          password: 87cca89@87CCA89
           envs: DGRAPH_ADDR
           script_stop: true
           script: |
