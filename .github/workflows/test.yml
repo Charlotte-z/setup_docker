@@ -16,4 +16,10 @@ jobs:
           envs: DGRAPH_ADDR
           script_stop: true
           script: |
-            echo 123
+            cd /tmp
+            data=aha
+            if [ -d "$data" ]; then
+              echo "Directory $data exists."
+            else
+              echo "Directory $data does not exist."
+            fi
