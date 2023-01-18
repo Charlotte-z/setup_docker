@@ -23,3 +23,9 @@ jobs:
               echo "2"
               echo "3"
             fi
+
+            if [ "$data" = "aha" ]; then
+              echo "4"
+              echo "5"
+              echo "6"
+            fi
