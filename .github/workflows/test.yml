@@ -18,6 +18,6 @@ jobs:
           script: |
             cd /tmp
             data=aha
-            if [ -d "$data" ]; then
+            if [[ -d "$data" ]]; then
               echo "Directory $data exists."
             fi
