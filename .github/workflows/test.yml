@@ -1,17 +1,19 @@
 name: Frontend e2e test
 
-on:
-  pull_request:
-    types: [opened, synchronize]
-  workflow_dispatch:
+on: push
 
 
 jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch_name=$(echo ${GITHUB_REF#refs/tags/})" >> $GITHUB_OUTPUT
-        id: extract_branch
-      - run: echo "${{ toJSON(github) }}"
+      - name: Backup old services and deploy new services
+        uses: appleboy/ssh-action@master
+        with:
+          host: 42.193.16.100
+          username: root
+          password: 87cca89
+          envs: DGRAPH_ADDR
+          script_stop: true
+          script: |
+            echo 123
