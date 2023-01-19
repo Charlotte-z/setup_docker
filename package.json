@@ -1,0 +1,25 @@
+{
+  "name": "workflows",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Charlotte-z/setup_docker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Charlotte-z/setup_docker/issues"
+  },
+  "homepage": "https://github.com/Charlotte-z/setup_docker#readme",
+  "dependencies": {
+    "ant-design": "^1.0.0",
+    "react": "^18.2.0",
+    "relay": "^0.8.0-1"
+  }
+}
