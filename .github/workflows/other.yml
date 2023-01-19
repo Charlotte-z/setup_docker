@@ -4,9 +4,15 @@ on: push
 
 jobs:
   one:
+    strategy:
+      matrix:
+        include:
+          - environment: production
+          - environment: staging
+          - environment: dev
     environment:
-      name: dev
+      name: ${{ matrix.environment }}
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "${{ github.event.deployment.environment }}"
+          echo "${{ vars.ENV }}"
