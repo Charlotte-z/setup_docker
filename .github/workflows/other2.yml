@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish production
     steps:
-      - run: echo "is: ${{ toJSON(github.event_name) }}"
+      - run: echo "is:${{ toJSON(github.event_name) }}"
