@@ -5,7 +5,7 @@ on: push
 jobs:
   one:
     environment:
-      name: ${{ github.event.deployment.environment }}
+      name: dev
     runs-on: ubuntu-latest
     steps:
       - run: |
