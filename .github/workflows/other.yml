@@ -1,31 +1,12 @@
 name: Test
 
-on:
-  pull_request:
-    types: [opened]
+on: push
 
 jobs:
   one:
+    environment:
+      name: ${{ github.event.deployment.environment }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Cache node modules
-        id: cache-node-modules
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          # caching node_modules
-          path: |
-            **/node_modules
-            **/.eslintcache
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          # 👆 name of the chache key includes package-lock.json
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install Dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: |
-          yarn install
+      - run: |
+          echo "${{ github.event.deployment.environment }}"
