@@ -22,5 +22,5 @@ jobs:
       - run: |
           echo "${{ toJSON(github.event_name) }}"
       - name: test
-        if: github.event_name == 'push'
+        if: ${{ github.event_name }} == 'push'
         run: echo "test"
