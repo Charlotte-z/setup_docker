@@ -1,6 +1,7 @@
 name: Test
 
 on:
+  push
   release:
     types: [published]
   pull_request:
@@ -20,3 +21,6 @@ jobs:
     steps:
       - run: |
           echo "${{ toJSON(github.event_name) }}"
+      - name: test
+        if: github.event_name == 'push'
+        run: echo "test"
