@@ -1,7 +1,7 @@
 name: Test
 
 on:
-  push
+  push:
   release:
     types: [published]
   pull_request:
