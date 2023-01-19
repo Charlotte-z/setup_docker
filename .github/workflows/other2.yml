@@ -4,14 +4,8 @@ on:
   workflow_call:
 
 jobs:
-  deploy_wasm:
-    name: Deploy wasm to staging
-    uses: ./.github/workflows/other2.yml
-    secrets: inherit
-
   publish-production:
     runs-on: ubuntu-latest
     name: Publish production
-    needs: deploy_wasm
     steps:
       - run: echo "${{ toJSON(github.event_name) }}"
