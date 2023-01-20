@@ -16,7 +16,7 @@ jobs:
       - run: |
           en=ww
           if [[ "$en" == "ww" ]]; then
-            echo "environment=staging" >> $GITHUB_ENV;
+            echo "environment=production" >> $GITHUB_ENV;
           fi
     outputs:
       environment: ${{ env.environment }}
