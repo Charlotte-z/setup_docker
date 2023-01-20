@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "${{ toJSON(github.event_name) }}"
+          echo "is_staging=true" >> $GITHUB_ENV;
+          echo "is_production=true" >> $GITHUB_ENV;
       - name: test
-        if: github.event_name == "pushj"
+        if: ${{ env.is_staging }}
         run: echo "test"
