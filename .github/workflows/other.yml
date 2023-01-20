@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: |
           echo "is_staging=true" >> $GITHUB_ENV;
-          echo "is_production=false" >> $GITHUB_ENV;
+          echo "is_production=true" >> $GITHUB_ENV;
       - name: test
         if: ${{ env.is_staging == 'true' &&  env.is_production == 'true' }}
         run: echo "test"
