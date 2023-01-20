@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: |
           en=ww
-          if [[ "$en" == "ww" ]]; then
+          if [[ "${{ github.event_name }}" == 'push' ]]; then
             echo "environment=production" >> $GITHUB_ENV;
           fi
     outputs:
