@@ -17,5 +17,5 @@ jobs:
           echo "is_staging=true" >> $GITHUB_ENV;
           echo "is_production=true" >> $GITHUB_ENV;
       - name: test
-        if: ${{ env.is_staging == 'true' &&  env.is_production == 'true' }} && github.event_name == 'push'
+        if: ${{ env.is_staging == 'true' &&  env.is_production == 'true' }} && github.event_name == 'release'
         run: echo "test"
