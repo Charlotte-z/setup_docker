@@ -12,7 +12,7 @@ on:
 jobs:
   trigger:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'release'
+    if: ${{ github.event_name == 'push' }}
     steps:
       - run: |
           echo "workflow triggered!"
