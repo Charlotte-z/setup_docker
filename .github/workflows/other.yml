@@ -11,7 +11,6 @@ on:
 
 jobs:
   one:
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/other2.yml
   
   two:
