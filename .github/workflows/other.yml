@@ -10,9 +10,12 @@ on:
 
 
 jobs:
-  trigger:
+  one:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    uses: ./.github/workflows/other2.yml
+  
+  two:
+    runs-on: ubuntu-latest
     steps:
       - run: |
           echo "workflow triggered!"

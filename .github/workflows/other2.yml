@@ -7,5 +7,6 @@ jobs:
   publish-production:
     runs-on: ubuntu-latest
     name: Publish production
+    if: ${{ github.event_name == 'push' }}
     steps:
       - run: echo "is:${{ toJSON(github.event_name) }}"
