@@ -15,6 +15,7 @@ jobs:
   
   two:
     runs-on: ubuntu-latest
+    if: (github.event.pull_request.base.ref == 'master' && github.event.pull_request.merged == true) || github.event_name == 'release'
     steps:
       - run: |
           echo "workflow triggered!"
