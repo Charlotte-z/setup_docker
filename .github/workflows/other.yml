@@ -2,7 +2,7 @@ name: Test
 
 on:
   release:
-    types: [published]
+    types: [released]
   pull_request:
     types:
       - closed
