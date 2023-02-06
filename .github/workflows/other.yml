@@ -12,7 +12,7 @@ on:
 jobs:
   one:
     uses: ./.github/workflows/other2.yml
-  
+
   two:
     runs-on: ubuntu-latest
     steps:
