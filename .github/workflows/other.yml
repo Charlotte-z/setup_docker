@@ -16,7 +16,11 @@ jobs:
   two:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup short-sha
+        uses: wikifactory/wikifactory-actions/short_sha@main
+        id: short-sha
       - run: |
+          echo ${{ steps.short-sha.outputs.sha }}
           echo ${{ github.event.pull_request.base.ref }}
           echo ${{ github.event.pull_request.base.ref == 'master' }}
           echo "${{ github.event_name }}"
