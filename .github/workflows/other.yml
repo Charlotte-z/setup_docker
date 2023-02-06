@@ -1,6 +1,7 @@
 name: Test
 
 on:
+  push:
   release:
     types: [released]
   pull_request:
@@ -16,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          echo ${{ github.event.pull_request.base.ref }}
+          echo ${{ github.event.pull_request.base.ref == 'master' }}
           echo "${{ github.event_name }}"
           echo "workflow triggered!"
   # preset:
