@@ -18,6 +18,7 @@ jobs:
     if: (github.event.pull_request.base.ref == 'master' && github.event.pull_request.merged == true) || github.event_name == 'push'
     steps:
       - run: |
+          echo "${{ github.event_name }}"
           echo "workflow triggered!"
   # preset:
   #   runs-on: ubuntu-latest
