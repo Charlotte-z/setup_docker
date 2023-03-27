@@ -24,6 +24,7 @@ jobs:
           echo ${{ github.event.pull_request.base.ref }}
           echo ${{ github.event.pull_request.base.ref == 'master' }}
           echo "${{ github.event_name }}"
+          echo "dst_tag_long: production.${{ github.event.release.tag_name }}"
           echo "workflow triggered!"
   # preset:
   #   runs-on: ubuntu-latest
