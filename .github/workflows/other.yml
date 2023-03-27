@@ -3,7 +3,7 @@ name: Test
 on:
   push:
   release:
-    types: [released]
+    types: [released, prereleased]
   pull_request:
     types:
       - closed
