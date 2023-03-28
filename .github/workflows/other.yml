@@ -23,3 +23,4 @@ jobs:
           echo "${{ github.event_name }}"
           echo "dst_tag_long: ${{ github.event.action }}"
           echo "workflow triggered!"
+          echo ${{ github.event.release.prerelease }}
