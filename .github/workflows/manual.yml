@@ -26,7 +26,7 @@ on:
         type: boolean
         default: true
       backend_go:
-        description: 'Deploy backend_go'
+        description: 'Deploy backend go'
         required: false
         type: boolean
         default: true
