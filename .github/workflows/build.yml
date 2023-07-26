@@ -1,0 +1,18 @@
+# Pull nodejs image and mount admin-frontend as dev
+
+name: Build admin frontend
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize]
+  merge_group:
+    branches: [ main ]
+
+jobs:
+  sleep:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 60 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '60s'
