@@ -1,12 +1,7 @@
 name: Manual Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Release Tag'
-        required: false
-        type: string
+  push:
 
 jobs:
   release:
@@ -15,5 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Echo tag
-        run: echo ${{ github.event.inputs.tag }}
+      - name: Test
+        uses: Charlotte-z/workflows/increase_version@main
+      
+      - name: Check
+        run: |
+          cat package.json
