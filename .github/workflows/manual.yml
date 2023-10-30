@@ -15,7 +15,15 @@ jobs:
 
       - name: Test
         uses: Charlotte-z/workflows/increase_version@main
-      
+
       - name: Check
         run: |
           cat package.json
+
+      - name: Commit to master
+        run: |
+          git config --local user.email '2698028166@qq.com'
+          git config --local user.name "Charlotte-z"
+          git add -A
+          git commit -am'update version'
+          git push origin main
