@@ -25779,6 +25779,14 @@ module.exports = require("perf_hooks");
 
 /***/ }),
 
+/***/ 7282:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("process");
+
+/***/ }),
+
 /***/ 3477:
 /***/ ((module) => {
 
@@ -25901,7 +25909,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const fs = __nccwpck_require__(7147);
+const path = __nccwpck_require__(1017);
 const core = __nccwpck_require__(4182);
+const process = __nccwpck_require__(7282);
 
 try {
   function incrementVersion(version) {
@@ -25920,14 +25930,16 @@ try {
     return parts.join(".");
   }
 
-  const packageJsonPath = core.getInput("path");
-  const packageData = require(packageJsonPath);
+  const pathInput = core.getInput("path");
+  const fullPath = path.join(process.env.GITHUB_WORKSPACE, pathInput);
+
+  const packageDataRaw = fs.readFileSync(fullPath, "utf8"); // Use 'utf8' encoding to get a string
+  const packageData = JSON.parse(packageDataRaw);
+
   packageData.version = incrementVersion(packageData.version);
 
-  fs.writeFileSync(
-    packageJsonPath,
-    JSON.stringify(packageData, null, 2) + "\n"
-  );
+  fs.writeFileSync(fullPath, JSON.stringify(packageData, null, 2) + "\n");
+
   core.setOutput("new-version", packageData.version);
 } catch (error) {
   core.setFailed(error.message);
