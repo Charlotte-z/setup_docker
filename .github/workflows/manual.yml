@@ -3,7 +3,7 @@ name: Manual Release
 on:
   workflow_dispatch:
     inputs:
-      tags:
+      tag:
         description: 'Release Tag'
         required: false
         type: string
