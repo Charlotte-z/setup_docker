@@ -10,6 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: A
+        run: ls
+
       - name: Test
         uses: Charlotte-z/workflows/increase_version@main
       
