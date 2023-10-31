@@ -12,7 +12,9 @@ jobs:
   sleep:
     runs-on: ubuntu-latest
     steps:
-    - name: Sleep for 60 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '60s'
+    - name: Trim branch
+      uses: wikifactory/wikifactory-actions/trim_branch@main
+
+    - name: check
+      run: |
+        echo "${{ env.TRIM_BRANCH }}"
