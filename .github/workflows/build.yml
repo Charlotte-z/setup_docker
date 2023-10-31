@@ -20,4 +20,4 @@ jobs:
     - name: check
       run: |
         echo "${{ env.TRIM_BRANCH }}"
-        echo "github.event_name"
+        echo "${{ github.event_name }}"
