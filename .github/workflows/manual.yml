@@ -28,3 +28,7 @@ jobs:
           git add -A
           git commit -am'update version from ${{ github.event.inputs.version }}'
           git push origin main
+
+  test:
+    needs: update-version
+    uses: ./.github/workflows/build.yml
