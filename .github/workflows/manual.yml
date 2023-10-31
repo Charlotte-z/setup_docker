@@ -20,10 +20,15 @@ jobs:
         run: |
           cat package.json
 
+      - name: Show old and new version
+        run: |
+          echo "Old Version: ${{ steps.version-update.outputs.old-version }}"
+          echo "New Version: ${{ steps.version-update.outputs.new-version }}"
+
       - name: Commit to master
         run: |
           git config --local user.email '2698028166@qq.com'
           git config --local user.name "Charlotte-z"
           git add -A
-          git commit -am'update version'
+          git commit -am'update version from ${{ steps.version-update.outputs.old-version }} to ${{ steps.version-update.outputs.new-version}}'
           git push origin main
