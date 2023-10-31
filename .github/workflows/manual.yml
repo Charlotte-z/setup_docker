@@ -1,37 +1,30 @@
-name: Manual Release
+name: Update version in package.json
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.2.3)'
+        required: true
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
+  update-version:
+    runs_on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Install jq
+        run: sudo apt-get install jq
 
-      - name: A
-        run: ls
-
-      - name: Test
-        id: package-version-update
-        uses: Charlotte-z/workflows/increase_version@main
-        with:
-          path: ./package.json
-
-      - name: Check
+      - name: Update version in package.json
         run: |
-          cat package.json
-
-      - name: Show old and new version
-        run: |
-          echo "Old Version: ${{ steps.package-version-update.outputs.old-version }}"
-          echo "New Version: ${{ steps.package-version-update.outputs.new-version }}"
+          jq '.version = "${{ github.event.inputs.version }}"' package.json > tmp.json && mv tmp.json package.json
 
       - name: Commit to master
         run: |
           git config --local user.email '2698028166@qq.com'
           git config --local user.name "Charlotte-z"
           git add -A
-          git commit -am'update version from ${{ steps.package-version-update.outputs.old-version }} to ${{ steps.package-version-update.outputs.new-version}}'
+          git commit -am'update version from ${{ github.event.inputs.version }}'
           git push origin main
