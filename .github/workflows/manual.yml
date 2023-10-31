@@ -16,6 +16,8 @@ jobs:
       - name: Test
         id: package-version-update
         uses: Charlotte-z/workflows/increase_version@main
+        with:
+          path: ./package.json
 
       - name: Check
         run: |
