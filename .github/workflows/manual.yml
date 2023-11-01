@@ -42,7 +42,7 @@ jobs:
           git add -A
           git commit -am'update version from ${{ github.event.inputs.version }}'
           git push origin main
-          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "commit_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
   test2:
     runs-on: ubuntu-latest
