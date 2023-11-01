@@ -25,7 +25,7 @@ jobs:
       - name: Check
         run: |
           echo "${{ inputs.release-type  }}"
-          echo "${{ inputs.release-type === 'prerelease' }}"
+          echo "${{ inputs.release-type == 'prerelease' }}"
       
       - name: Install jq
         run: sudo apt-get install jq
