@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: test it
-        if: steps.filter.outputs.any_changed == 'true'
+        if: 1==1 || steps.filter.outputs.any_changed == 'true'
         run: |
           echo "${{ github.event.inputs.version }}"
           echo "${{ github.event.inputs.release-type }}"
