@@ -18,6 +18,8 @@ on:
 jobs:
   update-version:
     runs-on: ubuntu-latest
+    outputs:
+      commit_sha: ${{ steps.commit.outputs.commit_sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -40,7 +42,10 @@ jobs:
           git add -A
           git commit -am'update version from ${{ github.event.inputs.version }}'
           git push origin main
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
   test:
     needs: update-version
     uses: ./.github/workflows/build.yml
+    with:
+      commit_sha: ${{ needs.update-package-version.outputs.commit_sha }}

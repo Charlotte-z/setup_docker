@@ -8,12 +8,21 @@ on:
   merge_group:
     branches: [ main ]
   workflow_call:
+    inputs:
+      commit_sha:
+        description: 'Commit SHA to checkout'
+        required: true
+        type: string
 
 #2
 jobs:
   sleep:
     runs-on: ubuntu-latest
     steps:
+    - name: log
+      run: |
+        echo "${{ inputs.commit_sha }}"
+    
     - name: Trim branch
       uses: wikifactory/wikifactory-actions/trim_branch@main
 
