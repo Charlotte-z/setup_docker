@@ -29,7 +29,6 @@ jobs:
 
       - name: Install jq
         run: sudo apt-get install jq
-
       - name: Update version in package.json
         run: |
           jq '.version = "${{ github.event.inputs.version }}"' package.json > tmp.json && mv tmp.json package.json
