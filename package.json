@@ -1,6 +1,6 @@
 {
   "name": "workflows",
-  "version": "45",
+  "version": "55",
   "description": "",
   "main": "index.js",
   "scripts": {
