@@ -24,6 +24,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: test it
+        if: steps.filter.outputs.any_changed == 'true'
+        run: |
+          echo "${{ github.event.inputs.version }}"
+          echo "${{ github.event.inputs.release-type }}"
+          echo "${{ github.event.inputs.release-type == 'prerelease' }}"
+
       - name: Check
         run: |
           echo "${{ inputs.release-type  }}"
