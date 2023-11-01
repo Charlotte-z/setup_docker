@@ -36,6 +36,7 @@ jobs:
           jq '.version = "${{ github.event.inputs.version }}"' package.json > tmp.json && mv tmp.json package.json
 
       - name: Commit to master
+        id: commit
         run: |
           git config --local user.email '2698028166@qq.com'
           git config --local user.name "Charlotte-z"
