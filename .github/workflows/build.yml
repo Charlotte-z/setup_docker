@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: log
       run: |
-        echo "${{ github.event.inputs.commit_sha }}"
+        echo "${{ inputs.commit_sha }}"
     
     - name: Trim branch
       uses: wikifactory/wikifactory-actions/trim_branch@main
