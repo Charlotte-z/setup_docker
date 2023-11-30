@@ -14,7 +14,6 @@ on:
 
 jobs:
   test:
-    needs: update-version
     uses: ./.github/workflows/build.yml
     with:
       environment: ${{ github.event.inputs.environment }}
