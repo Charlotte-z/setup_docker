@@ -1,30 +1,15 @@
-# Pull nodejs image and mount admin-frontend as dev
+name: Trigger Repository B Action
 
-name: Build admin frontend
+on: [push]
 
-on:
-  workflow_call:
-    inputs:
-      environment:
-        description: 'manual publish to environment'
-        required: false
-        type: string
-
-
-#2
 jobs:
-  sleep:
+  trigger:
     runs-on: ubuntu-latest
     steps:
-    - name: log
-      if: ${{ github.event_name == 'pull_request' || inputs.environment == 'staging' }}
-      run: |
-        echo "${{ inputs.commit_sha }}"
-
-    - name: Trim branch
-      uses: wikifactory/wikifactory-actions/trim_branch@main
-
-    - name: check
-      run: |
-        echo "${{ env.TRIM_BRANCH }}"
-        echo "${{ github.event_name }}"
+      - name: Trigger Repository B workflow
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.PAT }}" \
+            https://api.github.com/repos/Charlotte-z/test-repo/dispatches \
+            -d '{"event_type": "custom-event-name"}'
