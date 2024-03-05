@@ -12,4 +12,5 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.PAT }}" \
             https://api.github.com/repos/Charlotte-z/test-repo/dispatches \
-            -d '{"event_type": "custom-event-name"}'
+            -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
+
