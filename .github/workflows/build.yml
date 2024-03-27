@@ -7,57 +7,62 @@ jobs:
   trigger-and-wait:
     runs-on: ubuntu-latest
     env:
-      OWNER: "Charlotte-z"               # 设置环境变量
-      REPO: "test-repo"                  # 设置环境变量
-    steps:
-      - name: Trigger another repository's workflow and wait for success
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}  # 使用GitHub Secrets来引用PAT
-        run: |
-          trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          echo "Triggering workflow at $trigger_time"
+      OWNER: "Charlotte-z" # 设置环境变量
+      REPO: "test-repo" # 设置环境变量
+      steps:
+        - name: Trigger another repository's workflow and wait for success
+          env:
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+          run: |
+            trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            echo "Triggering workflow at $trigger_time"
 
-          # 触发workflow
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${GITHUB_TOKEN}" \
-            https://api.github.com/repos/${OWNER}/${REPO}/dispatches \
-            -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
-
-          echo "Workflow triggered, waiting for it to start..."
-          sleep 5
-
-          matched="false"
-          while [[ "$matched" == "false" ]]; do
-            response=$(curl -s \
-              -H "Authorization: token ${GITHUB_TOKEN}" \
+            # 触发workflow
+            curl -X POST \
               -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5")
-            
-            runs=$(echo "$response" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
-            
-            echo "$runs" | while read run; do
-              id=$(echo "$run" | jq -r '.id')
-              status=$(echo "$run" | jq -r '.status')
-              conclusion=$(echo "$run" | jq -r '.conclusion')
+              -H "Authorization: token ${GITHUB_TOKEN}" \
+              "https://api.github.com/repos/${OWNER}/${REPO}/dispatches" \
+              -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
+
+            echo "Workflow triggered, waiting for it to start..."
+            sleep 5
+
+            while :; do
+              response=$(curl -s \
+                -H "Authorization: token ${GITHUB_TOKEN}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5")
               
-              if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
-                echo "Workflow run $id completed successfully."
-                matched="true"
-                break 2
-              elif [[ "$status" == "completed" ]]; then
-                echo "Workflow run $id completed but was not successful."
+              echo "$response" | jq -r --arg trigger_time "$trigger_time" '.workflow_runs[] | select(.created_at > $trigger_time)' | (
+                matched=false
+                while read run; do
+                  id=$(echo "$run" | jq -r '.id')
+                  status=$(echo "$run" | jq -r '.status')
+                  conclusion=$(echo "$run" | jq -r '.conclusion')
+                  
+                  if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
+                    echo "Workflow run $id completed successfully."
+                    matched=true
+                    break
+                  elif [[ "$status" == "completed" ]]; then
+                    echo "Workflow run $id completed but was not successful."
+                    break
+                  else
+                    echo "Workflow run $id is still in progress."
+                  fi
+                done
+                
+                if [[ "$matched" == "true" ]]; then
+                  touch success.flag
+                fi
+              )
+              
+              if [[ -f success.flag ]]; then
+                echo "Found a successful workflow run. Exiting loop."
+                rm success.flag
                 break
               else
-                echo "Workflow run $id is still in progress."
+                echo "No successful run found yet, checking again in 30 seconds..."
+                sleep 30
               fi
             done
-
-            if [[ "$matched" == "true" ]]; then
-              echo "Exiting loop."
-              break
-            fi
-
-            echo "No successful run found yet, checking again in 30 seconds..."
-            sleep 30
-          done
