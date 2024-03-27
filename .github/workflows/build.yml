@@ -21,41 +21,41 @@ jobs:
           curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${GITHUB_TOKEN}" \
-            https://api.github.com/repos/${OWNER}/${REPO}/dispatches \
+            "https://api.github.com/repos/${OWNER}/${REPO}/dispatches" \
             -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
 
           echo "Workflow triggered, waiting for it to start..."
-
           sleep 5
 
+          # 使用临时文件存储runs的输出
+          temp_file=$(mktemp)
+          matched="false"
           while true; do
-            runs=$(curl -s \
+            curl -s \
               -H "Authorization: token ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
+              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")' > $temp_file
 
-            matched=false
-            echo "$runs" | while read run; do
+            while read run; do
               id=$(echo "$run" | jq -r '.id')
               status=$(echo "$run" | jq -r '.status')
               conclusion=$(echo "$run" | jq -r '.conclusion')
 
               if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
                 echo "Workflow run $id completed successfully."
-                matched=true
+                matched="true"
                 break
               elif [[ "$status" == "completed" ]]; then
                 echo "Workflow run $id completed but was not successful."
-                break
               else
                 echo "Workflow run $id is still in progress."
               fi
-            done
+            done < $temp_file
 
-            echo $matched
-            if [ "$matched" = true ]; then
+            if [[ "$matched" == "true" ]]; then
               break
             fi
 
             sleep 30  # Adjust the sleep time as needed
           done
+          rm $temp_file  # 清理临时文件
