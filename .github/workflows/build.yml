@@ -14,7 +14,7 @@ jobs:
           token: ${{ github.token }}
           repo: test-repo
           owner: Charlotte-z
-          workflow: automation-test.yml
+          workflow: adeploy.yml
       - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
         uses: Codex-/await-remote-run@v1.0.0
         with:
