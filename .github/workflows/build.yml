@@ -56,6 +56,6 @@ jobs:
               break
             fi
 
-            sleep 30  # Adjust the sleep time as needed
+            sleep 3  # Adjust the sleep time as needed
           done
           rm $temp_file  # 清理临时文件
