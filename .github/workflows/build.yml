@@ -43,7 +43,7 @@ jobs:
               diff=$((created_at_ts - trigger_time_ts))
 
               echo "Checking workflow run: ID $id, Created at $created_at, diff $diff"
-              if [ $diff -le 4 ] && [ $diff -ge -4 ]; then
+              if [ $diff -le 10 ] && [ $diff -ge -10 ]; then
                 echo "Found matching workflow run: ID $id, Created at $created_at"
                 exit 0
               fi
