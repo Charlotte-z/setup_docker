@@ -11,14 +11,14 @@ jobs:
         uses: codex-/return-dispatch@v1
         id: return_dispatch
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.PAT }}
           repo: test-repo
           owner: Charlotte-z
           workflow: deploy.yml
       - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
         uses: Codex-/await-remote-run@v1.0.0
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.PAT }}
           repo: test-repo
           owner: Charlotte-z
           run_id: ${{ steps.return_dispatch.outputs.run_id }}
