@@ -1,4 +1,4 @@
-name: Trigger and Wait Workflow
+name: Trigger and Wait for Successful Workflow
 
 on:
   push:
@@ -7,13 +7,12 @@ jobs:
   trigger-and-wait:
     runs-on: ubuntu-latest
     env:
-      OWNER: "Charlotte-z"               # 设置环境变量
-      REPO: "test-repo"                  # 设置环境变量
-      WORKFLOW_FILE: "deploy.yml"       # 设置环境变量
+      OWNER: "Charlotte-z"  # 设置环境变量
+      REPO: "test-repo"     # 设置环境变量
     steps:
-      - name: Trigger another repository's workflow and wait
+      - name: Trigger another repository's workflow and wait for success
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }} # 使用GitHub Secrets来引用PAT
+          GITHUB_TOKEN: ${{ secrets.PAT }}  # 使用GitHub Secrets来引用PAT
         run: |
           trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           echo "Triggering workflow at $trigger_time"
@@ -29,33 +28,33 @@ jobs:
 
           sleep 5
 
-          should_exit=false
-
           while true; do
             runs=$(curl -s \
               -H "Authorization: token ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5")
+              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
 
-            while IFS= read -r line; do
-              id=$(echo "$line" | jq -r '.id')
-              created_at=$(echo "$line" | jq -r '.created_at')
+            matched=false
+            echo "$runs" | while read run; do
+              id=$(echo "$run" | jq -r '.id')
+              status=$(echo "$run" | jq -r '.status')
+              conclusion=$(echo "$run" | jq -r '.conclusion')
 
-              created_at_ts=$(date -u -d "$created_at" +%s)
-              trigger_time_ts=$(date -u -d "$trigger_time" +%s)
-
-              diff=$((created_at_ts - trigger_time_ts))
-              
-              if [ $diff -le 10 ] && [ $diff -ge -10 ]; then
-                echo "Found matching workflow run: ID $id, Created at $created_at"
-                should_exit=true
-                break 2
+              if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
+                echo "Workflow run $id completed successfully."
+                matched=true
+                break
+              elif [[ "$status" == "completed" ]]; then
+                echo "Workflow run $id completed but was not successful."
+                break
+              else
+                echo "Workflow run $id is still in progress."
               fi
-            done < <(echo "$runs" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
+            done
 
-            if [ "$should_exit" = true ]; then
+            if [[ "$matched" == true ]]; then
               break
             fi
 
-            sleep 10
+            sleep 30  # Adjust the sleep time as needed
           done
