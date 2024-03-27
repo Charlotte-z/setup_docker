@@ -1,16 +1,50 @@
-name: Trigger Repository B Action
+name: Trigger and Wait Workflow
 
-on: [push]
-# awdwa
+on:
+  push:
+
 jobs:
-  trigger:
+  trigger-and-wait:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Repository B workflow
+      - name: Trigger another repository's workflow and wait
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          OWNER: "Charlotte-z"
+          REPO: "test-repo"
+          WORKFLOW_FILE: "deploy.yml"
         run: |
+          trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "Triggering workflow at $trigger_time"
+
           curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${{ secrets.PAT }}" \
-            https://api.github.com/repos/Charlotte-z/test-repo/dispatches \
+            -H "Authorization: token ${GITHUB_TOKEN}" \
+            https://api.github.com/repos/${OWNER}/${REPO}/dispatches \
             -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
 
+          echo "Workflow triggered, waiting for it to start..."
+
+          sleep 5
+
+          while true; do
+            runs=$(curl -s \
+              -H "Authorization: token ${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=5")
+            
+            echo "$runs" | jq -r '.workflow_runs[] | select(.created_at > "'$trigger_time'") | "\(.id) \(.created_at)"' | while read id created_at; do
+              created_at_ts=$(date -u -d "$created_at" +%s || date -u -jf "%Y-%m-%dT%H:%M:%SZ" "$created_at" +%s)
+              trigger_time_ts=$(date -u +%s)
+              
+              diff=$((created_at_ts - trigger_time_ts))
+              echo $created_at_ts
+              echo $trigger_time_ts
+              if [ $diff -le 4 ] && [ $diff -ge -4 ]; then
+                echo "Found matching workflow run: ID $id, Created at $created_at"
+                break 2
+              fi
+            done
+            
+            sleep 10
+          done
