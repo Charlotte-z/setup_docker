@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Trigger another repository's workflow and wait
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: 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
           OWNER: "Charlotte-z"
           REPO: "test-repo"
           WORKFLOW_FILE: "deploy.yml"
