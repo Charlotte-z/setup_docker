@@ -29,25 +29,33 @@ jobs:
 
           sleep 5
 
-          # 轮询检查workflow的状态
+          should_exit=false
+
           while true; do
             runs=$(curl -s \
               -H "Authorization: token ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=5")
-            
-            echo "$runs" | jq -r '.workflow_runs[] | select(.created_at > "'$trigger_time'") | "\(.id) \(.created_at)"' | while read id created_at; do
-              created_at_ts=$(date -u -d "$created_at" +%s)
-              trigger_time_ts=$(date -u +%s)
-              
-              diff=$((created_at_ts - trigger_time_ts))
+              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5")
 
-              echo "Checking workflow run: ID $id, Created at $created_at, diff $diff"
+            while IFS= read -r line; do
+              id=$(echo "$line" | jq -r '.id')
+              created_at=$(echo "$line" | jq -r '.created_at')
+
+              created_at_ts=$(date -u -d "$created_at" +%s)
+              trigger_time_ts=$(date -u -d "$trigger_time" +%s)
+
+              diff=$((created_at_ts - trigger_time_ts))
+              
               if [ $diff -le 10 ] && [ $diff -ge -10 ]; then
                 echo "Found matching workflow run: ID $id, Created at $created_at"
-                exit 0
+                should_exit=true
+                break 2
               fi
-            done
-            
+            done < <(echo "$runs" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
+
+            if [ "$should_exit" = true ]; then
+              break
+            fi
+
             sleep 10
           done
