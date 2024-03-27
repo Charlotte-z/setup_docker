@@ -15,5 +15,6 @@ jobs:
           workflow_file_name: deploy.yml
           wait_interval: 10
           propagate_failure: false
+          client_payload: '{"environment": "sssss"}'
           trigger_workflow: true
           wait_workflow: true
