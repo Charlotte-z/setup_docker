@@ -1,20 +1,16 @@
-name: Trigger and Wait Workflow
+name: Trigger Repository B Action
 
-on:
-  push:
-
+on: [push]
+# awdwa
 jobs:
-  trigger-and-wait:
+  trigger:
     runs-on: ubuntu-latest
     steps:
-      - uses: convictional/trigger-workflow-and-wait@v1.6.1
-        with:
-          owner: Charlotte-z
-          repo: test-repo
-          github_token: ${{ secrets.PAT }}
-          workflow_file_name: deploy.yml
-          wait_interval: 10
-          propagate_failure: false
-          client_payload: '{"environment": "sssss"}'
-          trigger_workflow: true
-          wait_workflow: true
+      - name: Trigger Repository B workflow
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.PAT }}" \
+            https://api.github.com/repos/Charlotte-z/test-repo/dispatches \
+            -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
+
