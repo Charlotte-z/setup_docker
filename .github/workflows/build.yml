@@ -6,56 +6,65 @@ on:
 jobs:
   trigger-and-wait:
     runs-on: ubuntu-latest
-    env:
-      OWNER: "Charlotte-z"  # 设置环境变量
-      REPO: "test-repo"     # 设置环境变量
     steps:
-      - name: Trigger another repository's workflow and wait for success
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}  # 使用GitHub Secrets来引用PAT
-        run: |
-          trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          echo "Triggering workflow at $trigger_time"
+      - name: Trigger wikifactory-deploy deployment workflow
+        uses: wikifactory/wikifactory-actions/trigger_repo_workflow@2024_3_27-wait-for-repo
+        with:
+          token: ${{ secrets.PAT }}
+          author: Charlotte-z
+          repo: test-repo
+          eventType: custom-event-name
+          environment: ${{ needs.setup_environment.outputs.ENVIRONMENT }}
+          commitFrom: alpha
+          imageTag: master
+          backendGoTag: master
+          flaskTag: master
+      # - name: Trigger another repository's workflow and wait for success
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.PAT }}  # 使用GitHub Secrets来引用PAT
+      #   run: |
+      #     trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+      #     echo "Triggering workflow at $trigger_time"
 
-          # 触发workflow
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${GITHUB_TOKEN}" \
-            "https://api.github.com/repos/${OWNER}/${REPO}/dispatches" \
-            -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
+      #     # 触发workflow
+      #     curl -X POST \
+      #       -H "Accept: application/vnd.github.v3+json" \
+      #       -H "Authorization: token ${GITHUB_TOKEN}" \
+      #       "https://api.github.com/repos/${OWNER}/${REPO}/dispatches" \
+      #       -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
 
-          echo "Workflow triggered, waiting for it to start..."
-          sleep 5
+      #     echo "Workflow triggered, waiting for it to start..."
+      #     sleep 5
 
-          # 使用临时文件存储runs的输出
-          temp_file=$(mktemp)
-          matched="false"
-          while true; do
-            curl -s \
-              -H "Authorization: token ${GITHUB_TOKEN}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")' > $temp_file
+      #     # 使用临时文件存储runs的输出
+      #     temp_file=$(mktemp)
+      #     matched="false"
+      #     while true; do
+      #       curl -s \
+      #         -H "Authorization: token ${GITHUB_TOKEN}" \
+      #         -H "Accept: application/vnd.github.v3+json" \
+      #         "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")' > $temp_file
 
-            while read run; do
-              id=$(echo "$run" | jq -r '.id')
-              status=$(echo "$run" | jq -r '.status')
-              conclusion=$(echo "$run" | jq -r '.conclusion')
+      #       while read run; do
+      #         id=$(echo "$run" | jq -r '.id')
+      #         status=$(echo "$run" | jq -r '.status')
+      #         conclusion=$(echo "$run" | jq -r '.conclusion')
 
-              if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
-                echo "Workflow run $id completed successfully."
-                matched="true"
-                break
-              elif [[ "$status" == "completed" ]]; then
-                echo "Workflow run $id completed but was not successful."
-              else
-                echo "Workflow run $id is still in progress."
-              fi
-            done < $temp_file
+      #         if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
+      #           echo "Workflow run $id completed successfully."
+      #           matched="true"
+      #           break
+      #         elif [[ "$status" == "completed" ]]; then
+      #           echo "Workflow run $id completed but was not successful."
+      #         else
+      #           echo "Workflow run $id is still in progress."
+      #         fi
+      #       done < $temp_file
 
-            if [[ "$matched" == "true" ]]; then
-              break
-            fi
+      #       if [[ "$matched" == "true" ]]; then
+      #         break
+      #       fi
 
-            sleep 3  # Adjust the sleep time as needed
-          done
-          rm $temp_file  # 清理临时文件
+      #       sleep 3  # Adjust the sleep time as needed
+      #     done
+      #     rm $temp_file  # 清理临时文件
