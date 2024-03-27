@@ -7,8 +7,8 @@ jobs:
   trigger-and-wait:
     runs-on: ubuntu-latest
     env:
-      OWNER: "Charlotte-z"  # 设置环境变量
-      REPO: "test-repo"     # 设置环境变量
+      OWNER: "Charlotte-z"               # 设置环境变量
+      REPO: "test-repo"                  # 设置环境变量
     steps:
       - name: Trigger another repository's workflow and wait for success
         env:
@@ -25,25 +25,26 @@ jobs:
             -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
 
           echo "Workflow triggered, waiting for it to start..."
-
           sleep 5
 
-          while true; do
-            runs=$(curl -s \
+          matched="false"
+          while [[ "$matched" == "false" ]]; do
+            response=$(curl -s \
               -H "Authorization: token ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
-
-            matched=false
+              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5")
+            
+            runs=$(echo "$response" | jq -c '.workflow_runs[] | select(.created_at > "'$trigger_time'")')
+            
             echo "$runs" | while read run; do
               id=$(echo "$run" | jq -r '.id')
               status=$(echo "$run" | jq -r '.status')
               conclusion=$(echo "$run" | jq -r '.conclusion')
-
+              
               if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
                 echo "Workflow run $id completed successfully."
-                matched=true
-                break
+                matched="true"
+                break 2
               elif [[ "$status" == "completed" ]]; then
                 echo "Workflow run $id completed but was not successful."
                 break
@@ -52,9 +53,11 @@ jobs:
               fi
             done
 
-            if [[ "$matched" == true ]]; then
+            if [[ "$matched" == "true" ]]; then
+              echo "Exiting loop."
               break
             fi
 
-            sleep 30  # Adjust the sleep time as needed
+            echo "No successful run found yet, checking again in 30 seconds..."
+            sleep 30
           done
