@@ -6,41 +6,21 @@ on:
 jobs:
   trigger-and-wait:
     runs-on: ubuntu-latest
-    env:
-      OWNER: "Charlotte-z"                 # 设置环境变量
-      REPO: "test-repo"                    # 设置环境变量
-      WORKFLOW_NAME: "Deploy Workflow"     # 假设你知道workflow的名称
     steps:
-      - name: Trigger another repository's workflow and wait
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }} # 使用GitHub Secrets来引用PAT
-        run: |
-          trigger_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          echo "Triggering workflow at $trigger_time"
-
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${GITHUB_TOKEN}" \
-            https://api.github.com/repos/${OWNER}/${REPO}/dispatches \
-            -d '{"event_type": "custom-event-name", "client_payload": {"environment": "sssss"}}'
-
-          echo "Workflow triggered, waiting for it to start..."
-          sleep 5
-
-          # 轮询检查workflow的状态
-          while true; do
-            runs=$(curl -s \
-              -H "Authorization: token ${GITHUB_TOKEN}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?per_page=5")
-
-            echo "$runs" | jq -r --arg WORKFLOW_NAME "$WORKFLOW_NAME" --arg TRIGGER_TIME "$trigger_time" \
-              '.workflow_runs[] | select(.name == $WORKFLOW_NAME and .created_at > $TRIGGER_TIME) | "\(.id) \(.created_at)"' \
-              | while read id created_at; do
-                  echo "Found matching workflow run: ID $id, Created at $created_at"
-                  # 找到匹配的运行后，可以跳出循环或进行其他操作
-                  exit 0
-                done
-
-            sleep 10
-          done
+      - name: Dispatch an action and get the run ID
+        uses: codex-/return-dispatch@v1
+        id: return_dispatch
+        with:
+          token: ${{ github.token }}
+          repo: test-repo
+          owner: Charlotte-z
+          workflow: automation-test.yml
+      - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
+        uses: Codex-/await-remote-run@v1.0.0
+        with:
+          token: ${{ github.token }}
+          repo: test-repo
+          owner: Charlotte-z
+          run_id: ${{ steps.return_dispatch.outputs.run_id }}
+          run_timeout_seconds: 300 # Optional
+          poll_interval_ms: 5000 # Optional
