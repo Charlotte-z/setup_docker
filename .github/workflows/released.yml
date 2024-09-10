@@ -2,7 +2,7 @@ name: Update version in package.json
 
 on:
   release:
-    types: [release]
+    types: [released, published]
 
 
 jobs:
