@@ -1,0 +1,13 @@
+name: Update version in package.json
+
+on:
+  release:
+    types: [released]
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Trigger wikifactory-deploy deployment workflow
+          run: echo "${{ github.event_name }}, ${{ github.event.action }}"
