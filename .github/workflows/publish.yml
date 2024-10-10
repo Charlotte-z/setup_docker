@@ -26,8 +26,11 @@ jobs:
           filters: |
             supabase_functions:
               - 'A/**'
+            portal:
+              - 'B/**'
     outputs:
       supabase_functions_changed: ${{ steps.filter.outputs.supabase_functions }}
+      portal_changed: ${{ steps.filter.outputs.portal }}
 
   deploy_edge_function:
     needs: detect_changes
@@ -36,3 +39,11 @@ jobs:
     steps:
       - name: Checkout code
         run: echo "Deploying edge function"
+
+  deploy_portal:
+    needs: detect_changes
+    if: needs.detect_changes.outputs.portal_changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        run: echo "Deploying portal"
