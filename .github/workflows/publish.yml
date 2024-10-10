@@ -26,10 +26,12 @@ jobs:
           filters: |
             supabase_functions:
               - 'A/**'
+    outputs:
+      supabase_functions_changed: ${{ steps.filter.outputs.supabase_functions }}
 
   deploy_edge_function:
     needs: detect_changes
-    if: needs.detect_changes.outputs.supabase_functions == 'true'
+    if: needs.detect_changes.outputs.supabase_functions_changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
