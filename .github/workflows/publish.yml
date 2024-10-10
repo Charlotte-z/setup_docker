@@ -1,0 +1,34 @@
+name: Deploy
+
+on:
+  pull_request:
+    types:
+      - closed
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  detect_changes:
+    if: (github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == true)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Filter paths
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            supabase_functions:
+              - 'A/**'
+
+  deploy_edge_function:
+    needs: detect_changes
+    if: needs.detect_changes.outputs.supabase_functions == 'true'
+    uses: ./.github/workflows/deploy_edge_function.yaml
+    secrets: inherit
